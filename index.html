@@ -61,6 +61,19 @@
   .confirm td{padding:4px 10px}
   .confirm td:first-child{color:#7d7d88}
   .fineprint{color:#6f6f7a;font-size:12px;margin-top:26px}
+  .acc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:820px){.acc-grid{grid-template-columns:1fr}}
+  .acc-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px}
+  .acc-card h3{font-size:20px;font-weight:900;margin:12px 0 4px}
+  .acc-card .ex{color:var(--sub);font-size:14px}
+  .acc-fig{background:#0d0f14;border:1px solid var(--line);border-radius:14px;padding:10px}
+  .cover{margin-top:14px;border-top:1px dashed #23232a;padding-top:12px}
+  .cover .row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:14px}
+  .cover .row span:first-child{color:var(--sub)}
+  .ok-chip{color:#06280f;background:var(--ok);font-weight:800;border-radius:999px;padding:2px 12px;font-size:13px}
+  .ng-chip{color:#fff;background:var(--warn);font-weight:800;border-radius:999px;padding:2px 12px;font-size:13px}
+  .warn-box{background:#221114;border:1px solid #5a2326;border-radius:14px;padding:16px 18px;margin-top:16px;color:#ffb4b4;font-size:15px}
+  .warn-box b{color:#ff8a8a}
   footer{padding:36px 0 56px;color:#6f6f7a;font-size:12px;border-top:1px solid var(--line)}
 </style>
 </head>
@@ -159,6 +172,81 @@
       <a class="btn-main" href="https://paypay.ne.jp/article/0077/" target="_blank" rel="noopener">あんしんドライブの案内を見る</a>
     </div>
     <p class="fineprint">※ 保険の加入はご利用者ご本人による手続きが必要です。加入後、加入者証（申込完了画面）のスクリーンショットをお送りください。内容を確認でき次第、予約が成立します。※ 保険で支払われない金額（免責・上限超過・対象外の損害）は、ご利用規約に基づきご負担いただきます。</p>
+  </div>
+</section>
+
+<section id="accident">
+  <div class="wrap">
+    <h2>事故には2つの種類があります</h2>
+    <p class="lead">どちらの事故かで、保険が使えるかどうかが変わります。むずかしくないので、先に知っておいてください。</p>
+    <div class="acc-grid">
+      <div class="acc-card">
+        <div class="acc-fig">
+          <svg viewBox="0 0 340 150" width="100%" role="img" aria-label="単独事故のイラスト">
+            <rect x="292" y="18" width="26" height="104" rx="4" fill="#3c4048"/>
+            <rect x="292" y="18" width="26" height="14" fill="#565d68"/>
+            <g>
+              <rect x="52" y="72" width="150" height="34" rx="12" fill="#4dd8ff"/>
+              <path d="M84 72 L104 46 L168 46 L190 72 Z" fill="#4dd8ff"/>
+              <rect x="112" y="52" width="26" height="16" rx="3" fill="#bfefff"/>
+              <rect x="144" y="52" width="26" height="16" rx="3" fill="#bfefff"/>
+              <circle cx="88" cy="108" r="14" fill="#14161a" stroke="#6b7280" stroke-width="3"/>
+              <circle cx="168" cy="108" r="14" fill="#14161a" stroke="#6b7280" stroke-width="3"/>
+            </g>
+            <g fill="#e8ff47">
+              <path d="M232 40 l6 14 15 1 -11 10 4 15 -13 -8 -13 8 4 -15 -11 -10 15 -1 Z"/>
+            </g>
+            <text x="238" y="112" font-size="17" font-weight="bold" fill="#e8ff47">ガツン！</text>
+            <path d="M40 128 H320" stroke="#2a2e36" stroke-width="3"/>
+          </svg>
+        </div>
+        <h3>① 単独事故（相手がいない事故）</h3>
+        <p class="ex">壁・ガードレール・駐車場の柱にぶつけた、縁石でホイールをこすった、など。<b>自分だけで起こす事故</b>です。実はこれが一番多いタイプです。</p>
+        <div class="cover">
+          <div class="row"><span>お手軽プラン（車両補償なし）</span><span class="ng-chip">使えない</span></div>
+          <div class="row"><span>基本プラン</span><span class="ng-chip">使えない</span></div>
+          <div class="row"><span>安心プラン</span><span class="ok-chip">使える</span></div>
+        </div>
+      </div>
+      <div class="acc-card">
+        <div class="acc-fig">
+          <svg viewBox="0 0 340 150" width="100%" role="img" aria-label="巻き込み事故のイラスト">
+            <g>
+              <rect x="18" y="72" width="128" height="32" rx="12" fill="#4dd8ff"/>
+              <path d="M44 72 L62 48 L118 48 L134 72 Z" fill="#4dd8ff"/>
+              <rect x="68" y="54" width="22" height="14" rx="3" fill="#bfefff"/>
+              <rect x="96" y="54" width="22" height="14" rx="3" fill="#bfefff"/>
+              <circle cx="48" cy="106" r="13" fill="#14161a" stroke="#6b7280" stroke-width="3"/>
+              <circle cx="116" cy="106" r="13" fill="#14161a" stroke="#6b7280" stroke-width="3"/>
+            </g>
+            <g>
+              <rect x="196" y="72" width="128" height="32" rx="12" fill="#ff7d9c"/>
+              <path d="M208 72 L224 48 L280 48 L298 72 Z" fill="#ff7d9c"/>
+              <rect x="224" y="54" width="22" height="14" rx="3" fill="#ffe3ec"/>
+              <rect x="252" y="54" width="22" height="14" rx="3" fill="#ffe3ec"/>
+              <circle cx="226" cy="106" r="13" fill="#14161a" stroke="#6b7280" stroke-width="3"/>
+              <circle cx="294" cy="106" r="13" fill="#14161a" stroke="#6b7280" stroke-width="3"/>
+            </g>
+            <g fill="#e8ff47">
+              <path d="M171 26 l5 12 13 1 -10 9 3 13 -11 -7 -11 7 3 -13 -10 -9 13 -1 Z"/>
+            </g>
+            <text x="146" y="140" font-size="15" font-weight="bold" fill="#e8ff47">ドン！</text>
+            <path d="M10 128 H330" stroke="#2a2e36" stroke-width="3"/>
+          </svg>
+        </div>
+        <h3>② 巻き込み事故（相手がいる事故）</h3>
+        <p class="ex">他の車とぶつかった、歩行者や自転車と接触した、相手の物を壊した、など。<b>誰かや何かを巻き込む事故</b>です。</p>
+        <div class="cover">
+          <div class="row"><span>相手への賠償（ケガ・相手の車）</span><span class="ok-chip">全プランで使える</span></div>
+          <div class="row"><span>借りた車の修理（お手軽）</span><span class="ng-chip">使えない</span></div>
+          <div class="row"><span>借りた車の修理（基本）</span><span class="ok-chip">一部使える</span></div>
+          <div class="row"><span>借りた車の修理（安心）</span><span class="ok-chip">使える</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="warn-box">
+      ⚠️ <b>よくある勘違いに注意：</b> 駐車場の柱に「コツン」とこすっただけでも、それは<b>単独事故</b>です。基本プランでは補償されず、修理費は実費負担になります。「ちょっとだけだから大丈夫」という事故ほど、プランの差が出ます。
+    </div>
   </div>
 </section>
 
