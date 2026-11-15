@@ -80,7 +80,21 @@
   .form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   @media(max-width:820px){.form-grid{grid-template-columns:1fr}}
   label.flabel{display:block;font-size:13px;color:var(--sub);margin-bottom:6px}
-  input[type="date"],select{width:100%;background:#0b0b0e;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:15px}
+  select{width:100%;background:#0b0b0e;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:15px}
+  .cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .cal-head .cal-title{font-weight:800;font-size:16px}
+  .cal-nav{background:transparent;border:1px solid var(--line);color:var(--text);border-radius:999px;width:36px;height:36px;font-size:16px;cursor:pointer}
+  .cal-nav:disabled{opacity:.3;cursor:default}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .cal-grid .dow{text-align:center;font-size:11px;color:var(--sub);padding:4px 0}
+  .cal-day{background:#0b0b0e;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 0;font-size:14px;cursor:pointer;text-align:center}
+  .cal-day:hover{border-color:#3a3a44}
+  .cal-day:disabled{opacity:.32;cursor:default;text-decoration:line-through}
+  .cal-day.booked{opacity:.45;cursor:default;text-decoration:line-through;background:#171114}
+  .cal-day.selected{background:var(--accent);color:#141310;font-weight:900;border-color:var(--accent);text-decoration:none}
+  .cal-note{font-size:12px;color:var(--sub);margin-top:8px}
+  .cal-selected{font-size:14px;margin-top:10px}
+  .cal-selected b{color:var(--accent)}
   .wizard-nav{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
   .btn-ghost{border:1px solid var(--line);padding:13px 24px;border-radius:999px;font-size:14px;background:transparent;color:var(--text);cursor:pointer}
   .err{color:var(--warn);font-size:13px;margin-top:10px;display:none}
@@ -225,16 +239,22 @@
 
         <div class="pane active" id="pane1">
           <h3>ご利用日時を選んでください</h3>
-          <div class="form-grid">
-            <div>
-              <label class="flabel" for="bk-date">日付</label>
-              <input type="date" id="bk-date">
+          <div>
+            <label class="flabel">日付（デフォルトは明日になっています。カレンダーで変更できます）</label>
+            <div class="cal-head">
+              <button type="button" class="cal-nav" id="cal-prev" onclick="moveMonth(-1)">‹</button>
+              <div class="cal-title" id="cal-title"></div>
+              <button type="button" class="cal-nav" id="cal-next" onclick="moveMonth(1)">›</button>
             </div>
+            <div class="cal-grid" id="cal-grid"></div>
+            <p class="cal-note">予約は3ヶ月先まで。×の日は満車（DriveShareの予約状況と連動しています）。</p>
+            <p class="cal-selected">選択中：<b id="cal-selected-label"></b></p>
+          </div>
+          <div class="form-grid" style="margin-top:18px">
             <div>
               <label class="flabel" for="bk-time">開始時刻</label>
               <select id="bk-time">
-                <option value="">選択してください</option>
-                <option>8:00</option><option>9:00</option><option>10:00</option>
+                <option>8:00</option><option>9:00</option><option selected>10:00</option>
                 <option>11:00</option><option>12:00</option><option>13:00</option>
                 <option>14:00</option><option>15:00</option><option>16:00</option>
                 <option>17:00</option><option>18:00</option><option>19:00</option>
@@ -244,10 +264,9 @@
             <div>
               <label class="flabel" for="bk-dur">利用時間</label>
               <select id="bk-dur">
-                <option value="">選択してください</option>
                 <option value="6">6時間（¥6,000〜）</option>
                 <option value="12">12時間（¥9,000〜）</option>
-                <option value="24">24時間（¥12,000〜）</option>
+                <option value="24" selected>24時間（¥12,000〜）</option>
               </select>
             </div>
           </div>
@@ -435,6 +454,56 @@
   if(location.hash === "#pricing"){ showView("pricing"); }
   if(location.hash === "#reserve"){ showView("reserve"); }
 
+  /* ===== カレンダー（デフォルト明日・3ヶ月先まで・DriveShare空き連動） ===== */
+  function ymd(d){
+    return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+  }
+  var calToday = new Date(); calToday.setHours(0,0,0,0);
+  var calTomorrow = new Date(calToday); calTomorrow.setDate(calTomorrow.getDate()+1);
+  var calMax = new Date(calToday); calMax.setMonth(calMax.getMonth()+3);
+  var calView = new Date(calTomorrow.getFullYear(), calTomorrow.getMonth(), 1);
+  var calSelected = ymd(calTomorrow);
+  var calBooked = [];
+  function renderCalendar(){
+    var y = calView.getFullYear(), m = calView.getMonth();
+    document.getElementById("cal-title").textContent = y + "年" + (m+1) + "月";
+    var grid = document.getElementById("cal-grid");
+    var html = "";
+    var dows = ["日","月","火","水","木","金","土"];
+    for(var i=0;i<7;i++){ html += '<div class="dow">' + dows[i] + "</div>"; }
+    var firstDow = new Date(y, m, 1).getDay();
+    var lastDay = new Date(y, m+1, 0).getDate();
+    for(var b=0;b<firstDow;b++){ html += "<div></div>"; }
+    for(var d=1; d<=lastDay; d++){
+      var cur = new Date(y, m, d);
+      var key = ymd(cur);
+      var dis = cur < calToday || cur > calMax;
+      var booked = calBooked.indexOf(key) >= 0;
+      var cls = "cal-day" + (booked ? " booked" : "") + (key === calSelected ? " selected" : "");
+      html += '<button type="button" class="' + cls + '"' + ((dis || booked) ? " disabled" : "") +
+              ' onclick="pickDate(\'' + key + '\')">' + d + "</button>";
+    }
+    grid.innerHTML = html;
+    var minView = new Date(calToday.getFullYear(), calToday.getMonth(), 1);
+    var maxView = new Date(calMax.getFullYear(), calMax.getMonth(), 1);
+    document.getElementById("cal-prev").disabled = calView <= minView;
+    document.getElementById("cal-next").disabled = calView >= maxView;
+    document.getElementById("cal-selected-label").textContent = fmtDate(calSelected);
+  }
+  function moveMonth(delta){
+    calView = new Date(calView.getFullYear(), calView.getMonth()+delta, 1);
+    renderCalendar();
+  }
+  function pickDate(key){
+    calSelected = key;
+    renderCalendar();
+  }
+  fetch("availability.json").then(function(r){ return r.ok ? r.json() : null; }).then(function(j){
+    if(j && j.unavailable){ calBooked = j.unavailable; }
+    renderCalendar();
+  }).catch(function(){ renderCalendar(); });
+  renderCalendar();
+
   var booking = { date:"", time:"", dur:0, plan:"" };
   var planIds = { "お手軽プラン":"plan-otekaru", "基本プラン":"plan-kihon", "安心プラン":"plan-anshin" };
   var planFee = { "お手軽プラン":{h12:650, h24:800}, "基本プラン":{h12:1400, h24:1700}, "安心プラン":{h12:2150, h24:2700} };
@@ -470,7 +539,7 @@
     window.scrollTo(0,0);
   }
   function goStep2(){
-    booking.date = document.getElementById("bk-date").value;
+    booking.date = calSelected;
     booking.time = document.getElementById("bk-time").value;
     booking.dur = parseInt(document.getElementById("bk-dur").value || "0", 10);
     if(!booking.date || !booking.time || !booking.dur){
