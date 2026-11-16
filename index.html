@@ -216,7 +216,7 @@
       <div class="cell rv">
         <p class="num">03</p>
         <h3>CHARGE INCLUDED</h3>
-        <p>充電代は料金に含まれます。返すときの充電も不要です。</p>
+        <p>充電代は料金に含まれます。走行距離の制限もありません。返すときの充電も不要です。</p>
       </div>
     </div>
   </section>
@@ -227,26 +227,26 @@
   <section class="wrap" style="padding-top:150px">
     <p class="slabel rv">01 — Pricing</p>
     <h2 class="title rv">時間で借りる、<br>それだけの料金。</h2>
-    <p class="lead rv">登録料・月額費はありません。充電代込み。保険はご予約の流れの中で、プランからお選びいただきます。</p>
+    <p class="lead rv">登録料・月額費はありません。充電代込み、走行距離の制限もありません。土日祝は各プラン+¥2,000です。保険はご予約の流れの中で、プランからお選びいただきます。</p>
 
     <div class="plans">
       <div class="plan-col rv">
         <p class="pname">6 Hours</p>
-        <p class="price">¥6,000<span style="font-size:16px;color:var(--sub)"> 〜</span></p>
+        <p class="price">¥6,000<span style="font-size:16px;color:var(--sub)"> 平日</span></p>
         <p class="per">ちょっとしたお出かけに</p>
-        <p class="pnote">料金は仮設定です。正式料金は公開時にご案内します。</p>
+        <p class="pnote">土日祝は ¥8,000（+¥2,000）</p>
       </div>
       <div class="plan-col offset rv">
         <p class="pname">12 Hours</p>
-        <p class="price">¥9,000<span style="font-size:16px;color:var(--sub)"> 〜</span></p>
+        <p class="price">¥9,000<span style="font-size:16px;color:var(--sub)"> 平日</span></p>
         <p class="per">日帰りドライブに</p>
-        <p class="pnote">料金は仮設定です。正式料金は公開時にご案内します。</p>
+        <p class="pnote">土日祝は ¥11,000（+¥2,000）</p>
       </div>
       <div class="plan-col rv">
         <p class="pname">24 Hours</p>
-        <p class="price">¥12,000<span style="font-size:16px;color:var(--sub)"> 〜</span></p>
+        <p class="price">¥12,000<span style="font-size:16px;color:var(--sub)"> 平日</span></p>
         <p class="per">まる一日、ゆっくりと</p>
-        <p class="pnote">料金は仮設定です。正式料金は公開時にご案内します。</p>
+        <p class="pnote">土日祝は ¥14,000（+¥2,000）</p>
       </div>
     </div>
 
@@ -330,9 +330,9 @@
           <div>
             <label class="flabel" for="bk-dur">Duration — 利用時間</label>
             <select id="bk-dur">
-              <option value="6">6時間（¥6,000〜）</option>
-              <option value="12">12時間（¥9,000〜）</option>
-              <option value="24" selected>24時間（¥12,000〜）</option>
+              <option value="6">6時間（¥6,000・平日）</option>
+              <option value="12">12時間（¥9,000・平日）</option>
+              <option value="24" selected>24時間（¥12,000・平日）</option>
             </select>
           </div>
         </div>
@@ -454,6 +454,7 @@
           加入できたら、<b style="color:var(--text)">加入者証のスクリーンショットを<a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener" style="color:var(--text);text-decoration:underline">InstagramのDM</a>（またはメール）でお送りください</b>。
           内容を確認でき次第、予約成立となります。
         </p>
+        <p style="font-size:12.5px;color:var(--faint);margin-top:12px">※ スクリーンショットには、プラン名・補償期間・車両番号（品川 342 り 802）・被保険者名が分かるようにお願いします。</p>
         <p style="margin-top:22px">
           <a class="btn-main" style="text-decoration:none" href="https://www.paypay-insurance.co.jp/promotion/car/app/" target="_blank" rel="noopener">PayPayほけん「あんしんドライブ」加入ページへ</a>
         </p>
@@ -477,6 +478,7 @@
           <div class="row"><dt>Date</dt><dd id="cf-date">—</dd></div>
           <div class="row"><dt>Start</dt><dd id="cf-time">—</dd></div>
           <div class="row"><dt>Duration</dt><dd id="cf-dur">—</dd></div>
+          <div class="row"><dt>Price</dt><dd id="cf-price">—</dd></div>
           <div class="row"><dt>Insurance</dt><dd id="cf-plan">—</dd></div>
           <div class="row"><dt>Vehicle</dt><dd>Tesla Model 3 Highland</dd></div>
         </dl>
@@ -501,7 +503,7 @@
 <footer>
   <p class="flogo">AMP.</p>
   <p>Tesla Model 3 Highland — Shintomicho, Chuo-ku, Tokyo</p>
-  <p>Personal car sharing. Prices are provisional.</p>
+  <p>Personal car sharing. No mileage limit.</p>
 </footer>
 
 <script>
@@ -553,6 +555,29 @@
   var calView = new Date(calTomorrow.getFullYear(), calTomorrow.getMonth(), 1);
   var calSelected = ymd(calTomorrow);
   var calBooked = [];
+  var RATES = { "6": {wd:6000, we:8000}, "12": {wd:9000, we:11000}, "24": {wd:12000, we:14000} };
+  var HOLIDAYS = ["2026-11-23","2027-01-01","2027-01-11","2027-02-11","2027-02-23","2027-03-20"];
+  function isWE(key){
+    var p = key.split("-");
+    var d = new Date(parseInt(p[0],10), parseInt(p[1],10)-1, parseInt(p[2],10));
+    var g = d.getDay();
+    return g === 0 || g === 6 || HOLIDAYS.indexOf(key) >= 0;
+  }
+  function rateFor(key, dur){
+    var r = RATES[String(dur)];
+    if(!r) return 0;
+    return isWE(key) ? r.we : r.wd;
+  }
+  function updateDurLabels(){
+    var sel = document.getElementById("bk-dur");
+    if(!sel) return;
+    var we = isWE(calSelected);
+    for(var i=0;i<sel.options.length;i++){
+      var o = sel.options[i];
+      var r = RATES[o.value];
+      if(r){ o.textContent = o.value + "時間（¥" + (we ? r.we : r.wd).toLocaleString() + "・" + (we ? "土日祝" : "平日") + "）"; }
+    }
+  }
   function renderCalendar(){
     var y = calView.getFullYear(), m = calView.getMonth();
     document.getElementById("cal-title").textContent = y + " — " + (m+1);
@@ -577,7 +602,8 @@
     var maxView = new Date(calMax.getFullYear(), calMax.getMonth(), 1);
     document.getElementById("cal-prev").disabled = calView <= minView;
     document.getElementById("cal-next").disabled = calView >= maxView;
-    document.getElementById("cal-selected-label").textContent = fmtDate(calSelected);
+    document.getElementById("cal-selected-label").textContent = fmtDate(calSelected) + (isWE(calSelected) ? "・土日祝料金" : "・平日料金");
+    updateDurLabels();
   }
   function moveMonth(delta){
     calView = new Date(calView.getFullYear(), calView.getMonth()+delta, 1);
@@ -610,6 +636,7 @@
     booking.date = calSelected;
     booking.time = document.getElementById("bk-time").value;
     booking.dur = parseInt(document.getElementById("bk-dur").value || "0", 10);
+    booking.rate = rateFor(booking.date, booking.dur);
     var err = document.getElementById("err-1");
     if(!booking.date || !booking.time || !booking.dur){ err.style.display = "block"; return; }
     err.style.display = "none";
@@ -642,6 +669,7 @@
       document.getElementById("cf-date").textContent = fmtDate(booking.date);
       document.getElementById("cf-time").textContent = booking.time;
       document.getElementById("cf-dur").textContent = booking.dur + "時間";
+      document.getElementById("cf-price").textContent = booking.rate ? ("¥" + booking.rate.toLocaleString() + (isWE(booking.date) ? "（土日祝）" : "（平日）")) : "—";
       document.getElementById("cf-plan").textContent = p ? p.name : "—";
     }
     window.scrollTo(0,0);
