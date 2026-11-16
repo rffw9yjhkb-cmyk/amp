@@ -165,6 +165,12 @@
   footer{border-top:1px solid var(--line);padding:54px 5vw 64px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   footer .flogo{font-size:15px;font-weight:300;letter-spacing:.34em}
   footer p{color:var(--faint);font-size:11px;letter-spacing:.14em}
+  .contact-sec{border-top:1px solid var(--line);padding:70px 5vw 6px}
+  .contact-sec h3{font-size:22px;font-weight:300;letter-spacing:.12em;margin:14px 0 12px}
+  .contact-sec p{color:var(--sub);font-size:13.5px;line-height:1.9;max-width:560px}
+  .ig-btn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;border:1px solid var(--text);color:var(--text);padding:13px 26px;font-size:13px;letter-spacing:.14em;text-decoration:none;transition:.25s}
+  .ig-btn:hover{background:var(--text);color:#0B0B0B}
+  .ig-btn svg{flex:none}
 </style>
 </head>
 <body>
@@ -300,7 +306,7 @@
       <div class="pane on" id="pane-1">
         <h3>ご利用日時</h3>
         <div>
-          <label class="flabel">Date — デフォルトは明日です</label>
+          <label class="flabel">Date</label>
           <div class="cal-head">
             <button type="button" class="cal-nav" id="cal-prev" onclick="moveMonth(-1)">‹</button>
             <div class="cal-title" id="cal-title"></div>
@@ -445,8 +451,11 @@
         </dl>
         <p style="font-size:14px;color:var(--sub)">
           PayPayアプリの「ほけん」から「あんしんドライブ」を選び、上の内容で加入してください（所要約1分）。
-          加入できたら、<b style="color:var(--text)">加入者証のスクリーンショットをInstagramのDM（またはメール）でお送りください</b>。
+          加入できたら、<b style="color:var(--text)">加入者証のスクリーンショットを<a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener" style="color:var(--text);text-decoration:underline">InstagramのDM</a>（またはメール）でお送りください</b>。
           内容を確認でき次第、予約成立となります。
+        </p>
+        <p style="margin-top:22px">
+          <a class="btn-main" style="text-decoration:none" href="https://www.paypay-insurance.co.jp/promotion/car/app/" target="_blank" rel="noopener">PayPayほけん「あんしんドライブ」加入ページへ</a>
         </p>
         <p style="margin-top:18px">
           <a class="link-quiet" href="https://paypay.ne.jp/article/0077/" target="_blank" rel="noopener">あんしんドライブについて（PayPay）</a>
@@ -480,6 +489,14 @@
     <p class="fineprint">ご負担の上限は車両時価額500万円で、保険でカバーされなかった分については実費精算となります。詳細はご予約時にご案内する利用規約をご確認ください。</p>
   </section>
 </main>
+
+<section class="contact-sec">
+  <p class="slabel">Contact</p>
+  <h3>お問い合わせ</h3>
+  <p>ご予約の相談・保険の加入者証の送付・ご質問は、InstagramのDMで受け付けています。お気軽にメッセージください。</p>
+  <a class="ig-btn" href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>@tesla_model3.chuo にDMする</a>
+  <p class="fineprint">プロフィール：<a href="https://www.instagram.com/tesla_model3.chuo" target="_blank" rel="noopener" style="color:var(--sub)">instagram.com/tesla_model3.chuo</a></p>
+</section>
 
 <footer>
   <p class="flogo">AMP.</p>
