@@ -256,25 +256,32 @@
         <p class="snum">01</p>
         <div>
           <h4>日時と保険プランを選ぶ</h4>
-          <p>Reserveから日時を選び、保険プランを選択します（保険はPayPayほけん「あんしんドライブ」）。</p>
+          <p>Reserveから日時を選び、保険プランを選択します（保険はPayPayほけん「あんしんドライブ」）。その場で、あなた専用のマイページ登録（パスキー／Facebook、両方選べます）もできます。</p>
         </div>
       </div>
       <div class="step-row rv">
         <p class="snum">02</p>
+        <div>
+          <h4>本人確認とお支払い</h4>
+          <p>運転免許証による本人確認（Stripe Identity）と、クレジットカードでのお支払い（Stripe）を行います。</p>
+        </div>
+      </div>
+      <div class="step-row rv">
+        <p class="snum">03</p>
         <div>
           <h4>保険に加入して、スクリーンショットを送る</h4>
           <p>案内に沿って保険に加入し、加入者証のスクリーンショットをInstagramのDMでお送りください。</p>
         </div>
       </div>
       <div class="step-row rv">
-        <p class="snum">03</p>
+        <p class="snum">04</p>
         <div>
           <h4>予約成立・キーをお送りします</h4>
-          <p>内容を確認できたら予約成立です。ご利用日の2日前に、スマホキーの招待リンクをお送りします。</p>
+          <p>保険の内容を確認できたら予約成立です。ご利用日の2日前に、スマホキーの招待リンクをお送りします。</p>
         </div>
       </div>
       <div class="step-row rv">
-        <p class="snum">04</p>
+        <p class="snum">05</p>
         <div>
           <h4>当日はスマホで解錠、そのまま出発</h4>
           <p>中央区・新富町の駐車場で非対面の受け渡し。返却も同じ場所へどうぞ。</p>
@@ -298,8 +305,9 @@
       <div class="progress">
         <div id="prog-1" class="on">1 — 日時</div>
         <div id="prog-2">2 — 保険</div>
-        <div id="prog-3">3 — 加入</div>
-        <div id="prog-4">4 — 成立</div>
+        <div id="prog-3">3 — 本人確認・支払い</div>
+        <div id="prog-4">4 — 加入</div>
+        <div id="prog-5">5 — 成立</div>
       </div>
 
       <!-- Step 1 -->
@@ -336,7 +344,30 @@
             </select>
           </div>
         </div>
+        <div style="margin-top:36px">
+          <label class="flabel">My Page — ワンタッチマイページ登録</label>
+          <p style="color:var(--sub);font-size:13px;margin-bottom:16px">ご予約の確認や保険の状況は、あなた専用のマイページでご覧いただけます。ログイン方法を選んでください（両方選べます）。</p>
+          <div id="reg-passkey" class="plan-opt" onclick="toggleReg('passkey')">
+            <div class="p-head">
+              <span class="p-name">パスキーで登録</span>
+              <span class="p-price">おすすめ</span>
+            </div>
+            <ul>
+              <li>Face ID・指紋認証でログインできます。パスワードは不要です</li>
+            </ul>
+          </div>
+          <div id="reg-facebook" class="plan-opt" onclick="toggleReg('facebook')">
+            <div class="p-head">
+              <span class="p-name">Facebookで登録</span>
+              <span class="p-price">ワンタッチ</span>
+            </div>
+            <ul>
+              <li>お持ちのFacebookアカウントで、そのままログインできます</li>
+            </ul>
+          </div>
+        </div>
         <p class="err" id="err-1">日時が選択されていません。</p>
+        <p class="err" id="err-reg">マイページのログイン方法を1つ以上選んでください。</p>
         <div class="btn-row">
           <button class="btn-main" onclick="goStep2()">保険プランの選択へ</button>
         </div>
@@ -437,12 +468,39 @@
         <p class="err" id="err-2">保険プランを選んでください。</p>
         <div class="btn-row">
           <button class="btn-ghost" onclick="goStep(1)">戻る</button>
-          <button class="btn-main" onclick="goStep3()">加入の案内へ</button>
+          <button class="btn-main" onclick="goStep3()">本人確認・お支払いへ</button>
         </div>
       </div>
 
       <!-- Step 3 -->
       <div class="pane" id="pane-3">
+        <h3>本人確認とお支払い</h3>
+        <dl class="summary" style="margin-bottom:26px">
+          <div class="row"><dt>Date</dt><dd id="id-date">—</dd></div>
+          <div class="row"><dt>Price</dt><dd id="id-price">—</dd></div>
+        </dl>
+        <p style="font-size:14px;color:var(--sub)">
+          安全なご利用のため、運転免許証による本人確認（Stripe Identity）と、クレジットカードでのお支払い（Stripe）をお願いしています。本人確認とお支払いが完了すると、次の保険加入へ進めます。
+        </p>
+        <div class="warnbox" style="margin-top:20px">
+          <p class="w-title">現在は準備中です</p>
+          <p>本人確認・決済の受付開始までは、InstagramのDMでご案内しています。開始後は、この画面からそのままお手続きいただけます。</p>
+        </div>
+        <p style="margin-top:22px">
+          <span class="btn-main" style="opacity:.45;pointer-events:none">本人確認をはじめる（準備中）</span>
+        </p>
+        <p style="margin-top:14px">
+          <span class="btn-main" style="opacity:.45;pointer-events:none">お支払いへ進む（準備中）</span>
+        </p>
+        <div class="btn-row">
+          <button class="btn-ghost" onclick="goStep(2)">戻る</button>
+          <button class="btn-main" onclick="goStep4()">保険への加入へ</button>
+        </div>
+        <p class="fineprint">※ 現在はデモ表示です。実際の受付はInstagramのDMでご案内します。</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="pane" id="pane-4">
         <h3>保険への加入</h3>
         <dl class="summary" style="margin-bottom:26px">
           <div class="row"><dt>Plan</dt><dd id="sum-plan">—</dd></div>
@@ -470,15 +528,15 @@
           <figcaption>正しい画面の例（イラスト）。審査は実際の加入詳細画面と照合します。イラストや加工された画像ではお通しできません。</figcaption>
         </figure>
         <div class="btn-row">
-          <button class="btn-ghost" onclick="goStep(2)">戻る</button>
-          <button class="btn-main" onclick="goStep(4)">スクリーンショットを送りました</button>
+          <button class="btn-ghost" onclick="goStep(3)">戻る</button>
+          <button class="btn-main" onclick="goStep(5)">スクリーンショットを送りました</button>
         </div>
         <p class="fineprint">確認からキーの送付まで、自動認識で対応しています🤖 何か問題があれば、<a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener" style="color:var(--sub);text-decoration:underline">InstagramのDM</a>にてお急ぎご連絡ください。</p>
         <p class="fineprint">※ 現在はデモ表示です。実際の受付はInstagramのDMでご案内します。</p>
       </div>
 
-      <!-- Step 4 -->
-      <div class="pane" id="pane-4">
+      <!-- Step 5 -->
+      <div class="pane" id="pane-5">
         <p class="pop">—</p>
         <p class="confirm-title">予約が成立しました</p>
         <p class="confirm-sub">ご利用日の2日前に、スマホキーの招待リンクをお送りします。</p>
@@ -490,6 +548,7 @@
           <div class="row"><dt>Duration</dt><dd id="cf-dur">—</dd></div>
           <div class="row"><dt>Price</dt><dd id="cf-price">—</dd></div>
           <div class="row"><dt>Insurance</dt><dd id="cf-plan">—</dd></div>
+          <div class="row"><dt>My Page</dt><dd id="cf-reg">—</dd></div>
           <div class="row"><dt>Vehicle</dt><dd>Tesla Model 3 Highland</dd></div>
         </dl>
         <div class="btn-row" style="justify-content:center">
@@ -629,7 +688,12 @@
   }).catch(function(){ renderCalendar(); });
   renderCalendar();
 
-  var booking = { date:"", time:"", dur:0, plan:"" };
+  var booking = { date:"", time:"", dur:0, plan:"", reg:{} };
+  function toggleReg(key){
+    booking.reg[key] = !booking.reg[key];
+    document.getElementById("reg-" + key).classList.toggle("selected", !!booking.reg[key]);
+    if(booking.reg[key]){ document.getElementById("err-reg").style.display = "none"; }
+  }
   var PLANS = {
     ote:    { name:"お手軽プラン", fee24:950,  fee12:750 },
     kihon:  { name:"基本プラン",   fee24:1350, fee12:1100 },
@@ -650,6 +714,7 @@
     var err = document.getElementById("err-1");
     if(!booking.date || !booking.time || !booking.dur){ err.style.display = "block"; return; }
     err.style.display = "none";
+    if(!booking.reg.passkey && !booking.reg.facebook){ document.getElementById("err-reg").style.display = "block"; return; }
     document.getElementById("anshin-badge").textContent = booking.dur + "時間のご利用には、安心プランがおすすめです";
     goStep(2);
   }
@@ -663,17 +728,22 @@
   }
   function goStep3(){
     if(!booking.plan){ document.getElementById("err-2").style.display = "block"; return; }
+    document.getElementById("id-date").textContent = fmtDate(booking.date) + " " + booking.time + "〜（" + booking.dur + "時間）";
+    document.getElementById("id-price").textContent = booking.rate ? ("¥" + booking.rate.toLocaleString() + (isWE(booking.date) ? "（土日祝）" : "（平日）")) : "—";
+    goStep(3);
+  }
+  function goStep4(){
     var p = PLANS[booking.plan];
     document.getElementById("sum-plan").textContent = p.name;
     document.getElementById("sum-fee").textContent = booking.dur >= 24 ? ("24時間 ¥" + p.fee24.toLocaleString()) : ("12時間 ¥" + p.fee12.toLocaleString());
-    goStep(3);
+    goStep(4);
   }
   function goStep(n){
-    for(var i=1;i<=4;i++){
+    for(var i=1;i<=5;i++){
       document.getElementById("pane-" + i).classList.toggle("on", i === n);
       document.getElementById("prog-" + i).classList.toggle("on", i === n);
     }
-    if(n === 4){
+    if(n === 5){
       var p = PLANS[booking.plan];
       document.getElementById("cf-no").textContent = "AMP-2026-0001";
       document.getElementById("cf-date").textContent = fmtDate(booking.date);
@@ -681,6 +751,10 @@
       document.getElementById("cf-dur").textContent = booking.dur + "時間";
       document.getElementById("cf-price").textContent = booking.rate ? ("¥" + booking.rate.toLocaleString() + (isWE(booking.date) ? "（土日祝）" : "（平日）")) : "—";
       document.getElementById("cf-plan").textContent = p ? p.name : "—";
+      var regs = [];
+      if(booking.reg.passkey) regs.push("パスキー");
+      if(booking.reg.facebook) regs.push("Facebook");
+      document.getElementById("cf-reg").textContent = regs.length ? regs.join(" / ") : "—";
     }
     window.scrollTo(0,0);
   }
