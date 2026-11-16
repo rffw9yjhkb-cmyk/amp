@@ -353,7 +353,7 @@
         <div id="plan-ote" class="plan-opt" onclick="selectPlan('ote')">
           <div class="p-head">
             <span class="p-name">お手軽プラン</span>
-            <span class="p-price">24時間 ¥800 / 12時間 ¥650</span>
+            <span class="p-price">24時間 ¥950 / 12時間 ¥750</span>
           </div>
           <ul>
             <li>対人・対物賠償：無制限</li>
@@ -365,7 +365,7 @@
         <div id="plan-kihon" class="plan-opt" onclick="selectPlan('kihon')">
           <div class="p-head">
             <span class="p-name">基本プラン</span>
-            <span class="p-price">24時間 ¥1,700 / 12時間 ¥1,400</span>
+            <span class="p-price">24時間 ¥1,350 / 12時間 ¥1,100</span>
           </div>
           <ul>
             <li>対人・対物賠償：無制限</li>
@@ -378,7 +378,7 @@
         <div id="plan-anshin" class="plan-opt" onclick="selectPlan('anshin')">
           <div class="p-head">
             <span class="p-name">安心プラン<span class="badge" id="anshin-badge">Recommended</span></span>
-            <span class="p-price">24時間 ¥2,700 / 12時間 ¥2,150</span>
+            <span class="p-price">24時間 ¥3,750 / 12時間 ¥3,000</span>
           </div>
           <ul>
             <li>対人・対物賠償：無制限</li>
@@ -451,16 +451,24 @@
         </dl>
         <p style="font-size:14px;color:var(--sub)">
           PayPayアプリの「ほけん」から「あんしんドライブ」を選び、上の内容で加入してください（所要約1分）。
-          加入できたら、<b style="color:var(--text)">加入者証のスクリーンショットを<a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener" style="color:var(--text);text-decoration:underline">InstagramのDM</a>（またはメール）でお送りください</b>。
-          内容を確認でき次第、予約成立となります。
         </p>
-        <p style="font-size:12.5px;color:var(--faint);margin-top:12px">※ スクリーンショットには、プラン名・補償期間・車両番号（品川 342 り 802）・被保険者名が分かるようにお願いします。</p>
+        <div class="warnbox" style="margin-top:20px">
+          <p class="w-title">期間とプランの選択にご注意ください</p>
+          <p>プランを選択したページの下の方に、期間（開始日時と長さ）を選択する画面が出てきます。ご予約の日時・プランと一致しているか、必ずご確認ください。内容は自動で文字認識・照合しているため、条件が異なるとご予約をお通しできません。時間に余裕を持ってお申し込みください。</p>
+        </div>
         <p style="margin-top:22px">
           <a class="btn-main" style="text-decoration:none" href="https://www.paypay-insurance.co.jp/promotion/car/app/" target="_blank" rel="noopener">PayPayほけん「あんしんドライブ」加入ページへ</a>
         </p>
         <p style="margin-top:18px">
           <a class="link-quiet" href="https://paypay.ne.jp/article/0077/" target="_blank" rel="noopener">あんしんドライブについて（PayPay）</a>
         </p>
+        <p style="font-size:14px;color:var(--sub);margin-top:26px">
+          加入が完了したら、申込完了画面の右下にある<b style="color:var(--text)">【加入詳細】</b>ボタンをタップし、ご本人様のお名前・車両ナンバー・保険期間が表示された画面のスクリーンショットを、<a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener" style="color:var(--text);text-decoration:underline">InstagramのDM</a>（またはメール）でお送りください。内容を確認でき次第、予約成立となります。
+        </p>
+        <figure class="fig" style="margin-top:18px">
+          <img src="insurance-example.svg" alt="加入詳細画面の見本イラスト" style="width:250px;max-width:70vw;height:auto">
+          <figcaption>正しい画面の例（イラスト）。審査は実際の加入詳細画面と照合します。イラストや加工された画像ではお通しできません。</figcaption>
+        </figure>
         <div class="btn-row">
           <button class="btn-ghost" onclick="goStep(2)">戻る</button>
           <button class="btn-main" onclick="goStep(4)">スクリーンショットを送りました</button>
@@ -621,9 +629,9 @@
 
   var booking = { date:"", time:"", dur:0, plan:"" };
   var PLANS = {
-    ote:    { name:"お手軽プラン", fee24:800,  fee12:650 },
-    kihon:  { name:"基本プラン",   fee24:1700, fee12:1400 },
-    anshin: { name:"安心プラン",   fee24:2700, fee12:2150 }
+    ote:    { name:"お手軽プラン", fee24:950,  fee12:750 },
+    kihon:  { name:"基本プラン",   fee24:1350, fee12:1100 },
+    anshin: { name:"安心プラン",   fee24:3750, fee12:3000 }
   };
   function fmtDate(v){
     if(!v) return "—";

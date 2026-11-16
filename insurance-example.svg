@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 620" font-family="sans-serif">
+  <rect x="6" y="6" width="348" height="608" rx="26" fill="#fdfdfa" stroke="#cfd4d1" stroke-width="2"/>
+  <!-- header -->
+  <path d="M6 32 Q6 6 32 6 L328 6 Q354 6 354 32 L354 74 L6 74 Z" fill="#8fd8cf"/>
+  <text x="180" y="50" font-size="21" font-weight="bold" fill="#123" text-anchor="middle">加入詳細</text>
+  <rect x="284" y="26" width="56" height="24" rx="12" fill="#fff" opacity="0.85"/>
+  <text x="312" y="43" font-size="12" font-weight="bold" fill="#0a7" text-anchor="middle">見本</text>
+  <!-- watermark -->
+  <text x="180" y="360" font-size="44" font-weight="bold" fill="#000" opacity="0.05" text-anchor="middle" transform="rotate(-24 180 360)">見本イラスト</text>
+  <!-- plan -->
+  <text x="28" y="112" font-size="16" fill="#222">お手軽プラン</text>
+  <rect x="252" y="94" width="80" height="26" rx="13" fill="none" stroke="#e8a04c" stroke-width="1.6"/>
+  <text x="292" y="112" font-size="13" fill="#e8a04c" text-anchor="middle">開始前</text>
+  <text x="28" y="142" font-size="23" font-weight="bold" fill="#111">あんしんドライブ</text>
+  <text x="28" y="166" font-size="12.5" fill="#888">加入者番号：00XX000000000</text>
+  <line x1="20" y1="188" x2="340" y2="188" stroke="#eee" stroke-width="8"/>
+  <!-- contents -->
+  <text x="28" y="226" font-size="18" font-weight="bold" fill="#111">ご加入内容</text>
+  <text x="28" y="266" font-size="14" fill="#999">被保険者</text>
+  <text x="332" y="266" font-size="15" fill="#222" text-anchor="end">山田 太郎</text>
+  <text x="28" y="304" font-size="14" fill="#999">保険開始日</text>
+  <text x="332" y="304" font-size="14.5" fill="#222" text-anchor="end">2026年12月6日 06時00分</text>
+  <text x="28" y="342" font-size="14" fill="#999">保険終了日</text>
+  <text x="332" y="342" font-size="14.5" fill="#222" text-anchor="end">2026年12月6日 18時00分</text>
+  <line x1="28" y1="360" x2="332" y2="360" stroke="#eee" stroke-width="1.5"/>
+  <text x="28" y="388" font-size="14" fill="#999">保険料</text>
+  <text x="332" y="388" font-size="16" font-weight="bold" fill="#222" text-anchor="end">750円</text>
+  <line x1="20" y1="408" x2="340" y2="408" stroke="#eee" stroke-width="8"/>
+  <!-- car -->
+  <text x="28" y="446" font-size="18" font-weight="bold" fill="#111">使用する自動車</text>
+  <rect x="95" y="462" width="170" height="86" rx="12" fill="#fff" stroke="#1c3f7c" stroke-width="2.4"/>
+  <text x="180" y="492" font-size="19" fill="#1c3f7c" text-anchor="middle">品川 342</text>
+  <text x="180" y="530" font-size="30" font-weight="bold" fill="#1c3f7c" text-anchor="middle">り・8 02</text>
+  <line x1="20" y1="566" x2="340" y2="566" stroke="#eee" stroke-width="8"/>
+  <!-- coverage -->
+  <text x="28" y="598" font-size="15" fill="#999">対人・対物賠償</text>
+  <text x="332" y="598" font-size="15" fill="#222" text-anchor="end">無制限</text>
+</svg>
