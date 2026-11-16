@@ -102,7 +102,13 @@
   /* ===== Wizard ===== */
   .wizard{border:1px solid var(--line);background:var(--panel2);padding:clamp(26px,5vw,54px)}
   .progress{display:flex;gap:0;margin-bottom:44px;border-bottom:1px solid var(--line)}
-  .progress div{flex:1;padding:0 4px 14px;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);text-align:center;position:relative}
+  .progress div{flex:1;padding:0 4px 14px;color:var(--faint);text-align:center;position:relative;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .progress .pnum{font-size:13px;font-weight:300;letter-spacing:.14em}
+  .progress .plabel{font-size:10px;letter-spacing:.18em;line-height:1.6}
+  @media(max-width:640px){
+    .progress .plabel{font-size:9px;letter-spacing:.04em;min-height:3.2em}
+    label.flabel{letter-spacing:.12em}
+  }
   .progress div.on{color:var(--text)}
   .progress div.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--text)}
   .pane{display:none}
@@ -161,6 +167,8 @@
   dl.summary .row{display:flex;justify-content:space-between;gap:16px;padding:15px 2px;border-bottom:1px solid var(--line);font-size:14px}
   dl.summary dt{color:var(--sub);font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding-top:3px}
   dl.summary dd{font-weight:400;letter-spacing:.05em;text-align:right}
+  dl.summary .row.tot-row dt{color:var(--text)}
+  dl.summary .row.tot-row dd{font-size:16px;font-weight:500}
 
   footer{border-top:1px solid var(--line);padding:54px 5vw 64px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   footer .flogo{font-size:15px;font-weight:300;letter-spacing:.34em}
@@ -262,14 +270,14 @@
       <div class="step-row rv">
         <p class="snum">02</p>
         <div>
-          <h4>本人確認とお支払い</h4>
-          <p>運転免許証による本人確認（Stripe Identity）と、クレジットカードでのお支払い（Stripe）を行います。</p>
+          <h4>本人確認とお支払い（レンタカー分）</h4>
+          <p>運転免許証による本人確認（Stripe Identity）と、レンタカー料金のクレジットカードでのお支払い（Stripe）を行います。保険料はPayPayアプリで別途お支払いいただきます。</p>
         </div>
       </div>
       <div class="step-row rv">
         <p class="snum">03</p>
         <div>
-          <h4>保険に加入して、スクリーンショットを送る</h4>
+          <h4>保険に加入して、スクリーンショットで確認</h4>
           <p>案内に沿って保険に加入し、加入者証のスクリーンショットをInstagramのDMでお送りください。</p>
         </div>
       </div>
@@ -303,11 +311,11 @@
 
     <div class="wizard">
       <div class="progress">
-        <div id="prog-1" class="on">1 — 日時</div>
-        <div id="prog-2">2 — 保険</div>
-        <div id="prog-3">3 — 本人確認・支払い</div>
-        <div id="prog-4">4 — 加入</div>
-        <div id="prog-5">5 — 成立</div>
+        <div id="prog-1" class="on"><span class="pnum">1</span><span class="plabel">日時</span></div>
+        <div id="prog-2"><span class="pnum">2</span><span class="plabel">保険</span></div>
+        <div id="prog-3"><span class="pnum">3</span><span class="plabel">本人確認・支払い</span></div>
+        <div id="prog-4"><span class="pnum">4</span><span class="plabel">加入確認</span></div>
+        <div id="prog-5"><span class="pnum">5</span><span class="plabel">成立</span></div>
       </div>
 
       <!-- Step 1 -->
@@ -350,7 +358,7 @@
           <div id="reg-passkey" class="plan-opt" onclick="toggleReg('passkey')">
             <div class="p-head">
               <span class="p-name">パスキーで登録</span>
-              <span class="p-price">おすすめ</span>
+              <span class="p-price">おすすめ<span class="badge" id="reg-badge-passkey" style="display:none">登録済み</span></span>
             </div>
             <ul>
               <li>Face ID・指紋認証でログインできます。パスワードは不要です</li>
@@ -359,7 +367,7 @@
           <div id="reg-facebook" class="plan-opt" onclick="toggleReg('facebook')">
             <div class="p-head">
               <span class="p-name">Facebookで登録</span>
-              <span class="p-price">ワンタッチ</span>
+              <span class="p-price">ワンタッチ<span class="badge" id="reg-badge-facebook" style="display:none">登録済み</span></span>
             </div>
             <ul>
               <li>お持ちのFacebookアカウントで、そのままログインできます</li>
@@ -368,6 +376,7 @@
         </div>
         <p class="err" id="err-1">日時が選択されていません。</p>
         <p class="err" id="err-reg">マイページのログイン方法を1つ以上選んでください。</p>
+        <p id="reg-note" style="display:none;color:var(--sub);font-size:13px;margin-top:14px;line-height:1.9"></p>
         <div class="btn-row">
           <button class="btn-main" onclick="goStep2()">保険プランの選択へ</button>
         </div>
@@ -465,6 +474,12 @@
           <p>基本プランでは補償されません。迷ったら安心プランをお選びください。なお、どのプランでも、ご負担の上限は車両時価額500万円で、保険でカバーされなかった分については実費精算となります。</p>
         </div>
 
+        <dl class="summary" style="margin-top:28px">
+          <div class="row"><dt>レンタカー料金</dt><dd id="tot-rent">—</dd></div>
+          <div class="row"><dt>保険料</dt><dd id="tot-ins">プランを選ぶと表示されます</dd></div>
+          <div class="row tot-row"><dt>合計</dt><dd id="tot-all">—</dd></div>
+        </dl>
+        <p class="fineprint" style="margin-top:12px">合計は、レンタカー料金と保険料を合わせた目安です。レンタカー料金は次のステップでカード払い、保険料はPayPayアプリで別途お支払いいただきます。</p>
         <p class="err" id="err-2">保険プランを選んでください。</p>
         <div class="btn-row">
           <button class="btn-ghost" onclick="goStep(1)">戻る</button>
@@ -474,13 +489,14 @@
 
       <!-- Step 3 -->
       <div class="pane" id="pane-3">
-        <h3>本人確認とお支払い</h3>
+        <h3>本人確認とお支払い（レンタカー分）</h3>
         <dl class="summary" style="margin-bottom:26px">
           <div class="row"><dt>Date</dt><dd id="id-date">—</dd></div>
           <div class="row"><dt>Price</dt><dd id="id-price">—</dd></div>
+          <div class="row"><dt>Insurance</dt><dd id="id-ins">—</dd></div>
         </dl>
         <p style="font-size:14px;color:var(--sub)">
-          安全なご利用のため、運転免許証による本人確認（Stripe Identity）と、クレジットカードでのお支払い（Stripe）をお願いしています。本人確認とお支払いが完了すると、次の保険加入へ進めます。
+          安全なご利用のため、運転免許証による本人確認（Stripe Identity）と、クレジットカードでのお支払い（Stripe）をお願いしています。ここでお支払いいただくのはレンタカー料金のみです（保険料は次のステップで、PayPayアプリから別途お支払いください）。本人確認とお支払いが完了すると、次の加入確認へ進めます。
         </p>
         <div class="warnbox" style="margin-top:20px">
           <p class="w-title">現在は準備中です</p>
@@ -494,20 +510,20 @@
         </p>
         <div class="btn-row">
           <button class="btn-ghost" onclick="goStep(2)">戻る</button>
-          <button class="btn-main" onclick="goStep4()">保険への加入へ</button>
+          <button class="btn-main" onclick="goStep4()">保険の加入確認へ</button>
         </div>
       </div>
 
       <!-- Step 4 -->
       <div class="pane" id="pane-4">
-        <h3>保険への加入</h3>
+        <h3>保険の加入確認</h3>
         <dl class="summary" style="margin-bottom:26px">
           <div class="row"><dt>Plan</dt><dd id="sum-plan">—</dd></div>
           <div class="row"><dt>Fee</dt><dd id="sum-fee">—</dd></div>
           <div class="row"><dt>Vehicle No.</dt><dd>品川 342 り 802</dd></div>
         </dl>
         <p style="font-size:14px;color:var(--sub)">
-          PayPayアプリの「ほけん」から「あんしんドライブ」を選び、上の内容で加入してください（所要約1分）。
+          ステップ2で選んだプラン・期間で加入できているかを、スクリーンショットで確認します。まだ加入していない方は、PayPayアプリの「ほけん」から「あんしんドライブ」を選び、上の内容で加入してください（所要約1分）。
         </p>
         <div class="warnbox" style="margin-top:20px">
           <p class="w-title">期間とプランの選択にご注意ください</p>
@@ -573,6 +589,9 @@
   <p>Personal car sharing. No mileage limit.</p>
 </footer>
 
+<script src="mypage-app/assets/config.js"></script>
+<script src="mypage-app/assets/auth-client.js"></script>
+<script src="mypage-app/assets/wizard-auth.js"></script>
 <script>
   var header = document.getElementById("site-header");
   function onScroll(){
@@ -692,11 +711,61 @@
     document.getElementById("reg-" + key).classList.toggle("selected", !!booking.reg[key]);
     if(booking.reg[key]){ document.getElementById("err-reg").style.display = "none"; }
   }
+  /* マイページ登録の完了状態（サーバーで確認できた分だけ true になる） */
+  var regState = { passkey:false, facebook:false };
+  function markRegDone(key){
+    regState[key] = true;
+    var b = document.getElementById("reg-badge-" + key);
+    if(b){ b.style.display = ""; }
+  }
+  function regNote(msg){
+    var n = document.getElementById("reg-note");
+    if(!n) return;
+    if(msg){ n.textContent = msg; n.style.display = "block"; }
+    else { n.textContent = ""; n.style.display = "none"; }
+  }
+  /* wizard-auth.js の結果を受けて、ステップ1表示と登録状態へ反映する */
+  function applyRegResult(res){
+    if(!res) return;
+    if(res.methods){
+      if(res.methods.passkey) markRegDone("passkey");
+      if(res.methods.facebook) markRegDone("facebook");
+    }
+    if(res.mode === "facebook-unavailable"){
+      regNote("Facebook登録は現在準備中のためご利用いただけません。ご予約はそのまま進められます（マイページ登録は後からでも行えます）。");
+    } else if(res.mode === "error"){
+      regNote("マイページ登録を完了できませんでした。ご予約はそのまま進められます（登録は後からでも行えます）。");
+    } else if(res.mode === "deferred"){
+      regNote("マイページ登録はスキップしました。ご予約はそのまま進められます（登録は後からでも行えます）。");
+    } else if(res.mode === "signup-completed" || res.mode === "already-signed-in"){
+      regNote("");
+    }
+  }
   var PLANS = {
     ote:    { name:"お手軽プラン", fee24:950,  fee12:750 },
     kihon:  { name:"基本プラン",   fee24:1350, fee12:1100 },
     anshin: { name:"安心プラン",   fee24:3750, fee12:3000 }
   };
+  function insFee(){
+    var p = PLANS[booking.plan];
+    if(!p) return 0;
+    return booking.dur >= 24 ? p.fee24 : p.fee12;
+  }
+  function updateInsTotal(){
+    var rentEl = document.getElementById("tot-rent");
+    if(!rentEl) return;
+    rentEl.textContent = booking.rate ? ("\u00a5" + booking.rate.toLocaleString() + "\uff08" + booking.dur + "\u6642\u9593\u30fb" + (isWE(booking.date) ? "\u571f\u65e5\u795d" : "\u5e73\u65e5") + "\uff09") : "\u2014";
+    var insEl = document.getElementById("tot-ins");
+    var allEl = document.getElementById("tot-all");
+    if(booking.plan){
+      var f = insFee();
+      insEl.textContent = "\u00a5" + f.toLocaleString() + "\uff08" + (booking.dur >= 24 ? "24\u6642\u9593" : "12\u6642\u9593") + "\uff09";
+      allEl.textContent = booking.rate ? ("\u00a5" + (booking.rate + f).toLocaleString()) : "\u2014";
+    } else {
+      insEl.textContent = "\u30d7\u30e9\u30f3\u3092\u9078\u3076\u3068\u8868\u793a\u3055\u308c\u307e\u3059";
+      allEl.textContent = "\u2014";
+    }
+  }
   function fmtDate(v){
     if(!v) return "—";
     var p = v.split("-");
@@ -713,7 +782,10 @@
     if(!booking.date || !booking.time || !booking.dur){ err.style.display = "block"; return; }
     err.style.display = "none";
     if(!booking.reg.passkey && !booking.reg.facebook){ document.getElementById("err-reg").style.display = "block"; return; }
+    /* マイページ登録（パスキー/Facebook）をその場で開始。失敗してもウィザードは止めない */
+    if(window.AmpAuth){ AmpAuth.onStep1Continue(booking).then(applyRegResult); }
     document.getElementById("anshin-badge").textContent = booking.dur + "時間のご利用には、安心プランがおすすめです";
+    updateInsTotal();
     goStep(2);
   }
   function selectPlan(key){
@@ -723,11 +795,14 @@
       document.getElementById("plan-" + keys[i]).classList.toggle("selected", keys[i] === key);
     }
     document.getElementById("err-2").style.display = "none";
+    updateInsTotal();
   }
   function goStep3(){
     if(!booking.plan){ document.getElementById("err-2").style.display = "block"; return; }
     document.getElementById("id-date").textContent = fmtDate(booking.date) + " " + booking.time + "〜（" + booking.dur + "時間）";
     document.getElementById("id-price").textContent = booking.rate ? ("¥" + booking.rate.toLocaleString() + (isWE(booking.date) ? "（土日祝）" : "（平日）")) : "—";
+    var p3 = PLANS[booking.plan];
+    document.getElementById("id-ins").textContent = p3 ? (p3.name + " ¥" + insFee().toLocaleString() + "（PayPayで別途）") : "—";
     goStep(3);
   }
   function goStep4(){
@@ -750,11 +825,37 @@
       document.getElementById("cf-price").textContent = booking.rate ? ("¥" + booking.rate.toLocaleString() + (isWE(booking.date) ? "（土日祝）" : "（平日）")) : "—";
       document.getElementById("cf-plan").textContent = p ? p.name : "—";
       var regs = [];
-      if(booking.reg.passkey) regs.push("パスキー");
-      if(booking.reg.facebook) regs.push("Facebook");
+      var authOn = !!(window.AmpAuth && AmpAuth.configured());
+      if(booking.reg.passkey) regs.push("パスキー" + (authOn ? (regState.passkey ? "（登録済み）" : "（未登録）") : ""));
+      if(booking.reg.facebook) regs.push("Facebook" + (authOn ? (regState.facebook ? "（登録済み）" : "（未登録）") : ""));
       document.getElementById("cf-reg").textContent = regs.length ? regs.join(" / ") : "—";
     }
     window.scrollTo(0,0);
+  }
+
+  /* マイページ登録（Facebook OAuth）から戻った場合の復元 */
+  if(window.AmpAuth){
+    AmpAuth.restoreIfReturned().then(function(res){
+      if(res.authError){
+        regNote(AmpAuth.authErrorMessage(res.authError) + "ご予約はそのまま進められます。");
+      }
+      if(res.signedIn && res.user){
+        if(res.user.hasPasskey) markRegDone("passkey");
+        if(res.user.facebookLinked) markRegDone("facebook");
+      }
+      if(!res.signedIn || !res.draft || !res.draft.booking){ return; }
+      var d = res.draft.booking;
+      booking.date = d.date; booking.time = d.time; booking.dur = d.dur;
+      booking.plan = d.plan; booking.reg = d.reg || {};
+      calSelected = d.date || "";
+      var t = document.getElementById("bk-time"); if(t && d.time){ t.value = d.time; }
+      var du = document.getElementById("bk-dur"); if(du && d.dur){ du.value = String(d.dur); }
+      if(booking.reg.passkey){ document.getElementById("reg-passkey").classList.add("selected"); }
+      if(booking.reg.facebook){ document.getElementById("reg-facebook").classList.add("selected"); }
+      if(d.plan){ selectPlan(d.plan); }
+      renderCalendar();
+      AmpAuth.clearDraft();
+    });
   }
 
   var initial = (location.hash || "").replace("#","");
