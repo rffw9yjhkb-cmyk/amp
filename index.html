@@ -173,6 +173,9 @@
   #plan-notice .w-title{font-size:15px;font-weight:700;letter-spacing:.1em;margin-bottom:8px}
   #plan-notice p{font-size:13.5px;color:var(--sub);line-height:1.85}
   #plan-notice .n-limit{margin-top:12px;padding-top:12px;border-top:1px solid var(--line2);font-size:14px;font-weight:700;color:var(--text);line-height:1.8}
+  #plan-notice .n-ex{display:none;margin-top:12px;padding-top:10px;border-top:1px solid #262626}
+  #plan-notice .n-ex p{font-size:11.5px;color:var(--faint);letter-spacing:.08em;margin-bottom:4px}
+  #plan-notice .n-ex li{font-size:12px;color:var(--faint);line-height:1.8;list-style:none}
   .warnbox.quiet{border-color:#262626;padding:14px 16px}
   .warnbox.quiet .w-title{font-size:11.5px;color:var(--faint);letter-spacing:.1em;margin-bottom:6px}
   .warnbox.quiet li,.warnbox.quiet p{font-size:12px;color:var(--faint);line-height:1.8}
@@ -466,18 +469,17 @@
           <p class="w-title" id="plan-notice-title"></p>
           <p id="plan-notice-text"></p>
           <p class="n-limit" id="plan-notice-limit"></p>
+          <div class="n-ex" id="plan-notice-examples">
+            <p>免責15万円の具体例</p>
+            <ul>
+              <li>例1：修理費80万円の場合 → 保険から65万円、自己負担は免責の15万円</li>
+              <li>例2：修理費400万円の場合 → 保険は上限の300万円まで、自己負担は100万円</li>
+              <li>例3：全損（車両時価500万円）の場合 → 保険は300万円まで、残り約200万円が実費精算の対象</li>
+            </ul>
+          </div>
         </div>
 
         <div class="warnbox quiet">
-          <p class="w-title">免責15万円の具体例（基本・安心プラン）</p>
-          <ul>
-            <li>例1：修理費80万円の場合 → 保険から65万円、自己負担は免責の15万円</li>
-            <li>例2：修理費400万円の場合 → 保険は上限の300万円まで、自己負担は100万円</li>
-            <li>例3：全損（車両時価500万円）の場合 → 保険は300万円まで、残り約200万円が実費精算の対象</li>
-          </ul>
-        </div>
-
-        <div class="warnbox">
           <p class="w-title">補償の対象外となる主なケース</p>
           <ul>
             <li>飲酒・無免許・薬物の影響下での運転、故意または重大な過失による事故</li>
@@ -816,8 +818,8 @@
     }
     document.getElementById("err-2").style.display = "none";
     var NOTICES = {
-      ote:   ["お手軽プランで補償されないもの", "車両補償がないため、単独事故・車同士の事故のどちらでも「車の損害」は補償されません。車を傷つけた場合、修理費は実費精算となります。", "⚠ 車両補償がないため、全損の場合は車両時価の全額（最大で約500万円）が自己負担になります。"],
-      kihon: ["基本プランで補償されないもの", "単独事故（壁・柱・ガードレールなど、相手のいない事故）による車の損害は補償されません。駐車場の柱に「コツン」も単独事故です。", "重要な制限：車両補償の上限は300万円、免責（自己負担）は15万円です。上限を超えた分は実費精算となります。"],
+      ote:   ["お手軽プランのご注意", "車両補償がないため、単独事故・車同士の事故のどちらでも「車の損害」は補償されません。車を傷つけた場合、修理費は実費精算となります。", "⚠ 車両補償がないため、全損の場合は車両時価の全額（最大で約500万円）が自己負担になります。"],
+      kihon: ["基本プランのご注意", "単独事故（壁・柱・ガードレールなど、相手のいない事故）による車の損害は補償されません。駐車場の柱に「コツン」も単独事故です。", "重要な制限：車両補償の上限は300万円、免責（自己負担）は15万円です。上限を超えた分は実費精算となります。"],
       anshin:["安心プランのご注意", "単独事故も補償対象です。駐車・停車中の損害など対象外のケースは、下記の「補償の対象外となる主なケース」をご確認ください。", "重要な制限：車両補償の上限は300万円、免責（自己負担）は15万円です。上限を超えた分は実費精算となります。"]
     };
     var n = NOTICES[key];
@@ -827,6 +829,7 @@
       var lim = document.getElementById("plan-notice-limit");
       lim.textContent = n[2] || "";
       lim.style.display = n[2] ? "block" : "none";
+      document.getElementById("plan-notice-examples").style.display = (key === "kihon" || key === "anshin") ? "block" : "none";
       document.getElementById("plan-notice").style.display = "block";
     }
     updateInsTotal();
