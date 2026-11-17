@@ -8,7 +8,7 @@
 <style>
   :root{
     --bg:#0B0B0B; --panel:#151515; --panel2:#101010;
-    --text:#F2F0EB; --sub:#999999; --faint:#666666;
+    --text:#F5F5F5; --sub:#999999; --faint:#666666;
     --line:#232323; --line2:#333333;
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -17,7 +17,7 @@
     font-family:"Helvetica Neue",Helvetica,Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",sans-serif;
     font-weight:300;line-height:1.9;-webkit-font-smoothing:antialiased}
   a{color:inherit}
-  ::selection{background:#F2F0EB;color:#0B0B0B}
+  ::selection{background:#F5F5F5;color:#0B0B0B}
 
   /* ===== Header ===== */
   header{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;justify-content:space-between;align-items:center;
@@ -45,16 +45,16 @@
   .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,11,.42) 0%,rgba(11,11,11,.08) 38%,rgba(11,11,11,.66) 100%)}
   .hero-inner{position:relative;z-index:2;width:100%;padding:0 5vw 9vh}
-  .kicker{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#cfccc4;margin-bottom:26px}
+  .kicker{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#CCCCCC;margin-bottom:26px}
   .hero h1{font-size:clamp(72px,15vw,168px);font-weight:200;letter-spacing:.06em;line-height:1;color:var(--text)}
-  .hero .rule{width:72px;height:1px;background:#F2F0EB;margin:34px 0 28px}
-  .hero .tagline{font-size:15px;letter-spacing:.14em;color:#e6e3da;max-width:520px}
+  .hero .rule{width:72px;height:1px;background:#F5F5F5;margin:34px 0 28px}
+  .hero .tagline{font-size:15px;letter-spacing:.14em;color:#E5E5E5;max-width:520px}
   .hero .meta{margin-top:14px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--sub)}
   .hero-cta{display:flex;gap:34px;align-items:center;margin-top:44px;flex-wrap:wrap}
-  .btn-line{border:1px solid #F2F0EB;background:transparent;color:var(--text);padding:17px 42px;
+  .btn-line{border:1px solid #F5F5F5;background:transparent;color:var(--text);padding:17px 42px;
     font-size:12px;letter-spacing:.34em;text-transform:uppercase;cursor:pointer;transition:all .35s;font-family:inherit}
   .btn-line:hover{background:var(--text);color:#0B0B0B}
-  .link-quiet{color:#d8d5cc;font-size:12px;letter-spacing:.3em;text-transform:uppercase;text-decoration:none;
+  .link-quiet{color:#D9D9D9;font-size:12px;letter-spacing:.3em;text-transform:uppercase;text-decoration:none;
     border-bottom:1px solid #55534c;padding-bottom:5px;cursor:pointer;transition:all .3s}
   .link-quiet:hover{color:var(--text);border-bottom-color:var(--text)}
 
@@ -118,7 +118,7 @@
   select{width:100%;background:transparent;color:var(--text);border:1px solid var(--line2);border-radius:0;padding:14px;font-size:15px;font-family:inherit;font-weight:300}
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
   @media(max-width:640px){.form-grid{grid-template-columns:1fr}}
-  .err{color:#d8d2c4;font-size:13px;margin-top:16px;display:none}
+  .err{color:#D9D9D9;font-size:13px;margin-top:16px;display:none}
 
   /* Calendar */
   .cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
@@ -144,10 +144,10 @@
   .plan-opt .p-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
   .plan-opt .p-name{font-size:16px;font-weight:400;letter-spacing:.16em}
   .plan-opt .p-price{font-size:14px;color:var(--sub);letter-spacing:.06em}
-  .badge{display:inline-block;font-size:9px;letter-spacing:.26em;text-transform:uppercase;border:1px solid #4a4a4a;color:#cfccc4;padding:5px 10px;margin-left:10px;vertical-align:2px}
+  .badge{display:inline-block;font-size:9px;letter-spacing:.26em;text-transform:uppercase;border:1px solid #4a4a4a;color:#CCCCCC;padding:5px 10px;margin-left:10px;vertical-align:2px}
   .plan-opt ul{list-style:none;margin-top:14px}
   .plan-opt li{font-size:13px;color:var(--sub);padding:3px 0;letter-spacing:.03em}
-  .plan-opt .p-warn{font-size:12px;color:#d8d2c4;margin-top:12px;letter-spacing:.03em}
+  .plan-opt .p-warn{font-size:12px;color:#D9D9D9;margin-top:12px;letter-spacing:.03em}
   .chip{display:inline-block;font-size:11px;padding:3px 10px;border:1px solid var(--line2);margin-right:6px;letter-spacing:.08em}
   .chip.ok{color:var(--text);border-color:#4a4a4a}
   .chip.ng{color:#777}
@@ -157,6 +157,20 @@
   .warnbox{border:1px solid #3a3a3a;background:var(--panel);padding:22px 24px;margin-top:22px}
   .warnbox .w-title{font-size:14px;font-weight:400;letter-spacing:.14em;margin-bottom:8px}
   .warnbox p{font-size:13px;color:var(--sub)}
+  .warnbox ul{list-style:none;margin-top:6px}
+  .warnbox li{font-size:13px;color:var(--sub);padding:3px 0;letter-spacing:.03em}
+  .warnbox li::before{content:"— "}
+  table.cmp{width:100%;border-collapse:collapse;margin:6px 0 26px;font-size:13px}
+  table.cmp th,table.cmp td{border:1px solid var(--line2);padding:10px 8px;text-align:center;letter-spacing:.03em}
+  table.cmp th{background:var(--panel);color:var(--text);font-weight:400}
+  table.cmp td:first-child{text-align:left;color:var(--sub)}
+  table.cmp td.ng{color:#777}
+  #plan-notice{display:none;border:1px solid var(--text);background:var(--panel);padding:20px 24px;margin:4px 0 18px}
+  #plan-notice .w-title{font-size:14px;font-weight:400;letter-spacing:.14em;margin-bottom:8px}
+  #plan-notice p{font-size:13px;color:var(--sub)}
+  .keybox{border:1px solid var(--text);background:var(--panel);padding:24px;margin:0 auto 26px;max-width:520px;text-align:center}
+  .keybox .k-title{font-size:16px;font-weight:400;letter-spacing:.12em;margin-bottom:8px}
+  .keybox p{font-size:13px;color:var(--sub)}
   .fineprint{font-size:12px;color:var(--faint);margin-top:18px}
 
   /* Confirm */
@@ -271,8 +285,8 @@
       <div class="step-row rv">
         <p class="snum">02</p>
         <div>
-          <h4>本人確認とお支払い（レンタカー分）</h4>
-          <p>運転免許証による本人確認（Stripe Identity）と、レンタカー料金のクレジットカードでのお支払い（Stripe）を行います。保険料はPayPayアプリで別途お支払いいただきます。</p>
+          <h4>本人確認とお支払い（レンタカー分）＝仮予約</h4>
+          <p>運転免許証による本人確認（Stripe Identity）と、レンタカー料金のクレジットカードでのお支払い（Stripe）を行います。保険料はPayPayアプリで別途お支払いいただきます。この時点では「仮予約」で、次の保険確認が取れると「確定予約」になります。</p>
         </div>
       </div>
       <div class="step-row rv">
@@ -285,8 +299,8 @@
       <div class="step-row rv">
         <p class="snum">04</p>
         <div>
-          <h4>予約成立・キーをお送りします</h4>
-          <p>保険の内容を確認できたら予約成立です。ご利用日の2日前に、スマホキーの招待リンクをお送りします。</p>
+          <h4>確定予約の成立・キーをお送りします</h4>
+          <p>保険の内容を確認できたら「確定予約」として成立です。スマホキーの招待リンクは、<b style="color:var(--text)">ご利用日の2日前</b>にお送りします（予約完了画面とマイページでもご案内します）。</p>
         </div>
       </div>
       <div class="step-row rv">
@@ -296,6 +310,11 @@
           <p>中央区・新富町の駐車場で非対面の受け渡し。返却も同じ場所へどうぞ。</p>
         </div>
       </div>
+    </div>
+
+    <div class="warnbox rv" style="margin-top:44px">
+      <p class="w-title">延長のご案内（1時間 ¥2,000）</p>
+      <p>ご利用時間の延長は、1時間あたり¥2,000で承ります。延長をご希望の場合は、終了時刻までにマイページからお手続き・お支払いください。<b style="color:var(--text)">終了時刻を5分過ぎると、スマホキーは自動で無効化されます</b>（無断延長はできません）。無効化後にマイページで延長料金をお支払いいただくと、キーを再発行して利用を再開できます。延長が成立した際は、保険も延長後の時刻までカバーされているか、加入内容を確認します。保険が延長できていない場合は延長をお受けできません。</p>
     </div>
 
     <div class="btn-row rv">
@@ -388,8 +407,19 @@
         <h3>保険プランの選択</h3>
         <p style="color:var(--sub);font-size:13px;margin-bottom:22px">
           ご利用には、PayPayほけん「あんしんドライブ」への加入が必須です（運転される方ご自身でのお手続き）。
-          相手への賠償（対人・対物）は<b style="color:var(--text)">全プラン無制限</b>です。プランで違うのは「車そのものの補償」だけです。
+          相手への賠償（対人・対物）は<b style="color:var(--text)">全プラン無制限</b>です。プランで違うのは「車そのものの補償」だけです。まず比較表で違いをご確認ください。
         </p>
+
+        <table class="cmp">
+          <tr><th></th><th>お手軽</th><th>基本</th><th>安心</th></tr>
+          <tr><td>相手への賠償（対人・対物）</td><td>○ 無制限</td><td>○ 無制限</td><td>○ 無制限</td></tr>
+          <tr><td>車同士の事故による車の損害</td><td class="ng">✕</td><td>○</td><td>○</td></tr>
+          <tr><td>単独事故による車の損害</td><td class="ng">✕</td><td class="ng">✕</td><td>○</td></tr>
+          <tr><td>ケガの補償（搭乗者傷害など）</td><td>○</td><td>○</td><td>○</td></tr>
+          <tr><td>ロードサービス</td><td>○</td><td>○</td><td>○</td></tr>
+          <tr><td>車両補償の上限</td><td class="ng">—（補償なし）</td><td>300万円</td><td>300万円</td></tr>
+          <tr><td>免責（自己負担額）</td><td class="ng">—</td><td>15万円</td><td>15万円</td></tr>
+        </table>
 
         <div id="plan-ote" class="plan-opt" onclick="selectPlan('ote')">
           <div class="p-head">
@@ -400,7 +430,7 @@
             <li>対人・対物賠償：無制限</li>
             <li>車両補償：<b style="color:var(--text)">なし</b></li>
           </ul>
-          <p class="p-warn">車を傷つけた場合、修理費は全額自己負担になります。ご負担の上限は車両時価額500万円で、保険でカバーされなかった分については実費精算となります。</p>
+          <p class="p-warn">このプランには車両補償がありません。単独事故・車同士の事故のどちらでも、車の損害は補償されません。車を傷つけた場合、修理費は実費精算となります（ご負担の上限は車両時価額500万円）。</p>
         </div>
 
         <div id="plan-kihon" class="plan-opt" onclick="selectPlan('kihon')">
@@ -413,7 +443,7 @@
             <li>車両補償：一部のみ（上限300万円・免責15万円）</li>
             <li>対象は「他の車との衝突・飛び石」など。<b style="color:var(--text)">単独事故は対象外</b>です</li>
           </ul>
-          <p class="p-warn">ご負担の上限は車両時価額500万円で、保険でカバーされなかった分については実費精算となります。</p>
+          <p class="p-warn">単独事故（壁・柱・ガードレールなど、相手のいない事故）による車の損害は補償されません。保険でカバーされなかった分は実費精算となります（ご負担の上限は車両時価額500万円）。</p>
         </div>
 
         <div id="plan-anshin" class="plan-opt" onclick="selectPlan('anshin')">
@@ -429,50 +459,31 @@
           <p class="p-warn">ご負担の上限は車両時価額500万円で、保険でカバーされなかった分については実費精算となります（例：全損の場合、300万円は保険でまかなわれ、残り約200万円が実費精算の対象です）。</p>
         </div>
 
-        <figure class="fig">
-          <svg width="300" height="120" viewBox="0 0 300 120" role="img" aria-label="単独事故のイラスト">
-            <rect x="238" y="14" width="16" height="76" fill="#3a3a3a"/>
-            <text x="246" y="106" font-size="10" fill="#999999" text-anchor="middle">かべ</text>
-            <path d="M28 78 L40 56 Q42 50 50 50 L96 50 Q106 50 114 58 L126 70 Q138 72 138 80 L138 86 L28 86 Z" fill="#9a9a9a"/>
-            <path d="M52 56 L62 56 L62 68 L46 68 Z" fill="#e8e6e0"/>
-            <path d="M68 56 L94 56 Q100 56 106 62 L112 68 L68 68 Z" fill="#e8e6e0"/>
-            <circle cx="54" cy="88" r="10" fill="#0B0B0B" stroke="#666" stroke-width="2"/>
-            <circle cx="116" cy="88" r="10" fill="#0B0B0B" stroke="#666" stroke-width="2"/>
-            <path d="M196 22 l5 10 11 2 -8 8 2 11 -10 -5 -10 5 2 -11 -8 -8 11 -2 Z" fill="#F2F0EB"/>
-            <text x="196" y="76" font-size="14" font-weight="bold" fill="#F2F0EB" text-anchor="middle">ガツン</text>
-            <line x1="10" y1="100" x2="290" y2="100" stroke="#2c2c2c" stroke-width="2"/>
-          </svg>
-          <figcaption>単独事故 — 壁や柱にぶつかるなど、相手がいない事故</figcaption>
-          <div class="cov">
-            <span class="chip ng">お手軽 ✕</span><span class="chip ng">基本 ✕</span><span class="chip ok">安心 ○</span>
-          </div>
-        </figure>
-
-        <figure class="fig">
-          <svg width="300" height="120" viewBox="0 0 300 120" role="img" aria-label="巻き込み事故のイラスト">
-            <path d="M18 78 L30 56 Q32 50 40 50 L86 50 Q96 50 104 58 L116 70 Q128 72 128 80 L128 86 L18 86 Z" fill="#9a9a9a"/>
-            <path d="M42 56 L52 56 L52 68 L36 68 Z" fill="#e8e6e0"/>
-            <path d="M58 56 L84 56 Q90 56 96 62 L102 68 L58 68 Z" fill="#e8e6e0"/>
-            <circle cx="44" cy="88" r="10" fill="#0B0B0B" stroke="#666" stroke-width="2"/>
-            <circle cx="106" cy="88" r="10" fill="#0B0B0B" stroke="#666" stroke-width="2"/>
-            <path d="M282 78 L270 56 Q268 50 260 50 L214 50 Q204 50 196 58 L184 70 Q172 72 172 80 L172 86 L282 86 Z" fill="#565656"/>
-            <path d="M258 56 L248 56 L248 68 L264 68 Z" fill="#e8e6e0"/>
-            <path d="M242 56 L216 56 Q210 56 204 62 L198 68 L242 68 Z" fill="#e8e6e0"/>
-            <circle cx="256" cy="88" r="10" fill="#0B0B0B" stroke="#666" stroke-width="2"/>
-            <circle cx="194" cy="88" r="10" fill="#0B0B0B" stroke="#666" stroke-width="2"/>
-            <path d="M150 16 l5 10 11 2 -8 8 2 11 -10 -5 -10 5 2 -11 -8 -8 11 -2 Z" fill="#F2F0EB"/>
-            <text x="150" y="70" font-size="14" font-weight="bold" fill="#F2F0EB" text-anchor="middle">ドン</text>
-            <line x1="10" y1="100" x2="290" y2="100" stroke="#2c2c2c" stroke-width="2"/>
-          </svg>
-          <figcaption>巻き込み事故 — 他の車とぶつかる事故</figcaption>
-          <div class="cov">
-            <span class="chip ok">相手への賠償 全プラン ○</span><span class="chip ng">車の修理 お手軽 ✕</span><span class="chip ok">基本 ○ 一部</span><span class="chip ok">安心 ○</span>
-          </div>
-        </figure>
+        <div id="plan-notice">
+          <p class="w-title" id="plan-notice-title"></p>
+          <p id="plan-notice-text"></p>
+        </div>
 
         <div class="warnbox">
-          <p class="w-title">駐車場の柱に「コツン」も、単独事故です</p>
-          <p>基本プランでは補償されません。迷ったら安心プランをお選びください。なお、どのプランでも、ご負担の上限は車両時価額500万円で、保険でカバーされなかった分については実費精算となります。</p>
+          <p class="w-title">重要な制限：車両補償の上限は300万円です</p>
+          <p>基本・安心プランの車両補償は、<b style="color:var(--text)">上限300万円</b>までです。また、事故の際はまず<b style="color:var(--text)">免責15万円</b>が自己負担となります。上限を超えた分と免責分は実費精算となります。</p>
+          <ul>
+            <li>例1：修理費80万円の場合 → 保険から65万円、自己負担は免責の15万円</li>
+            <li>例2：修理費400万円の場合 → 保険は上限の300万円まで、自己負担は100万円</li>
+            <li>例3：全損（車両時価500万円）の場合 → 保険は300万円まで、残り約200万円が実費精算の対象</li>
+          </ul>
+        </div>
+
+        <div class="warnbox">
+          <p class="w-title">補償の対象外となる主なケース</p>
+          <ul>
+            <li>飲酒・無免許・薬物の影響下での運転、故意または重大な過失による事故</li>
+            <li>地震・噴火・津波による損害</li>
+            <li>車両の盗難、故障・自然な消耗による損害（車両補償）</li>
+            <li>駐車・停車中の損害（車両補償は運転中のみ対象）。当て逃げは状況により対象外となる場合があります</li>
+            <li>競技・曲技での使用、保険期間外の運転、加入内容と異なる使い方をした場合</li>
+          </ul>
+          <p style="margin-top:8px">対象外の事故による損害は、保険でカバーされなかった分として実費精算の対象となります。詳細はPayPayほけん「あんしんドライブ」の重要事項説明書をご確認ください。</p>
         </div>
 
         <dl class="summary" style="margin-top:28px">
@@ -491,6 +502,7 @@
       <!-- Step 3 -->
       <div class="pane" id="pane-3">
         <h3>本人確認とお支払い（レンタカー分）</h3>
+        <p style="color:var(--sub);font-size:13px;margin-bottom:18px">このステップが完了した時点では<b style="color:var(--text)">「仮予約」</b>です。次のステップで保険の加入確認が取れると<b style="color:var(--text)">「確定予約」</b>になります。</p>
         <dl class="summary" style="margin-bottom:26px">
           <div class="row"><dt>Date</dt><dd id="id-date">—</dd></div>
           <div class="row"><dt>Price</dt><dd id="id-price">—</dd></div>
@@ -553,8 +565,11 @@
       <!-- Step 5 -->
       <div class="pane" id="pane-5">
         <p class="pop">—</p>
-        <p class="confirm-title">予約が成立しました</p>
-        <p class="confirm-sub">ご利用日の2日前に、スマホキーの招待リンクをお送りします。</p>
+        <p class="confirm-title">確定予約が成立しました</p>
+        <div class="keybox">
+          <p class="k-title">スマホキーは、ご利用日の2日前にお送りします</p>
+          <p>招待リンクをマイページとInstagramのDMでお送りします。当日はそのキーで解錠して、そのまま出発できます。終了時刻を5分過ぎるとキーは自動で無効化されます。延長をご希望の場合は、マイページから延長料金（1時間 ¥2,000）のお手続きをお願いします。</p>
+        </div>
         <p class="fineprint" style="text-align:center">キーの送付まで、自動認識で対応しています🤖 何か問題があれば、InstagramのDMにてお急ぎご連絡ください。</p>
         <dl class="summary">
           <div class="row"><dt>Booking No.</dt><dd id="cf-no">—</dd></div>
@@ -588,6 +603,7 @@
   <p class="flogo">AMP.</p>
   <p>Tesla Model 3 Highland — Shintomicho, Chuo-ku, Tokyo</p>
   <p>Personal car sharing. No mileage limit.</p>
+  <p><a href="privacy.html" style="color:var(--sub);text-decoration:underline">プライバシーポリシー</a></p>
 </footer>
 
 <script src="mypage-app/assets/config.js"></script>
@@ -796,6 +812,17 @@
       document.getElementById("plan-" + keys[i]).classList.toggle("selected", keys[i] === key);
     }
     document.getElementById("err-2").style.display = "none";
+    var NOTICES = {
+      ote:   ["お手軽プランで補償されないもの", "車両補償がないため、単独事故・車同士の事故のどちらでも「車の損害」は補償されません。車を傷つけた場合、修理費は実費精算となります。"],
+      kihon: ["基本プランで補償されないもの", "単独事故（壁・柱・ガードレールなど、相手のいない事故）による車の損害は補償されません。駐車場の柱に「コツン」も単独事故です。"],
+      anshin:["安心プランのご注意", "単独事故も補償対象です。ただし、免責15万円の自己負担と、車両補償の上限300万円を超えた分の実費精算があります。"]
+    };
+    var n = NOTICES[key];
+    if(n){
+      document.getElementById("plan-notice-title").textContent = n[0];
+      document.getElementById("plan-notice-text").textContent = n[1];
+      document.getElementById("plan-notice").style.display = "block";
+    }
     updateInsTotal();
   }
   function goStep3(){
