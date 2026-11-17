@@ -219,6 +219,7 @@
   <a class="logo" onclick="showView('home')">AMP.</a>
   <nav>
     <a class="nl" onclick="showView('pricing')">Pricing</a>
+    <a class="nl" href="mypage.html">Mypage</a>
     <button class="nav-reserve" onclick="showView('reserve')">Reserve</button>
   </nav>
 </header>
@@ -304,7 +305,7 @@
         <p class="snum">02</p>
         <div>
           <h4>本人確認とお支払い（レンタカー分）＝仮予約</h4>
-          <p>運転免許証による本人確認（Stripe Identity）と、レンタカー料金のクレジットカードでのお支払い（Stripe）を行います。保険料はPayPayアプリで別途お支払いいただきます。この時点では「仮予約」で、次の保険確認が取れると「確定予約」になります。</p>
+          <p>運転免許証による本人確認（Stripe Identity）と、レンタカー料金のクレジットカードでのお支払い（Stripe）を行います。保険料はPayPayアプリで別途お支払いいただきます。この時点では「仮予約」で、お申し込み後の保険の画像確認が完了すると「確定予約」になります。</p>
         </div>
       </div>
       <div class="step-row rv">
@@ -317,8 +318,8 @@
       <div class="step-row rv">
         <p class="snum">04</p>
         <div>
-          <h4>確定予約の成立・キーをお送りします</h4>
-          <p>保険の内容を確認できたら「確定予約」として成立です。スマホキーの招待リンクは、<b style="color:var(--text)">ご利用日の2日前</b>にお送りします（予約完了画面とマイページでもご案内します）。</p>
+          <h4>予約確定・キーをお送りします</h4>
+          <p>お申し込み後、アップロードいただいた保険の画像確認が完了しましたら、正式に予約確定となります。スマホキーの招待リンクは、<b style="color:var(--text)">ご利用日の2日前</b>にお送りします（マイページでもご案内します）。</p>
         </div>
       </div>
       <div class="step-row rv">
@@ -379,7 +380,7 @@
         <div id="prog-2"><span class="pnum">2</span><span class="plabel">保険</span></div>
         <div id="prog-3"><span class="pnum">3</span><span class="plabel">本人確認・支払い</span></div>
         <div id="prog-4"><span class="pnum">4</span><span class="plabel">加入確認</span></div>
-        <div id="prog-5"><span class="pnum">5</span><span class="plabel">成立</span></div>
+        <div id="prog-5"><span class="pnum">5</span><span class="plabel">申し込み完了</span></div>
       </div>
 
       <!-- Step 1 -->
@@ -558,7 +559,7 @@
       <!-- Step 3 -->
       <div class="pane" id="pane-3">
         <h3>本人確認とお支払い（レンタカー分）</h3>
-        <p style="color:var(--sub);font-size:13px;margin-bottom:18px">このステップが完了した時点では<b style="color:var(--text)">「仮予約」</b>です。次のステップで保険の加入確認が取れると<b style="color:var(--text)">「確定予約」</b>になります。</p>
+        <p style="color:var(--sub);font-size:13px;margin-bottom:18px">このステップが完了した時点では<b style="color:var(--text)">「仮予約」</b>です。お申し込みのあと、保険の画像確認が完了すると<b style="color:var(--text)">「確定予約」</b>になります。</p>
         <dl class="summary" style="margin-bottom:26px">
           <div class="row"><dt>Date</dt><dd id="id-date">—</dd></div>
           <div class="row"><dt>Price</dt><dd id="id-price">—</dd></div>
@@ -626,7 +627,7 @@
         <p style="font-size:13px;color:var(--sub);margin-top:24px;border:1px solid var(--line2);padding:14px 16px;line-height:1.85">なお、保険でカバーされなかった費用（免責分・上限を超えた分・対象外の損害など）は、理由にかかわらず<b style="color:var(--text)">実費で精算</b>いただきます。</p>
         <div class="btn-row">
           <button class="btn-ghost" onclick="goStep(3)">戻る</button>
-          <button class="btn-main" onclick="goStep5Check()">予約を確定する</button>
+          <button class="btn-main" onclick="goStep5Check()">予約を申し込む</button>
         </div>
         <p class="fineprint">確認からキーの送付まで、自動認識で対応しています🤖 何か問題があれば、<a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener" style="color:var(--sub);text-decoration:underline">InstagramのDM</a>にてお急ぎご連絡ください。</p>
       </div>
@@ -634,7 +635,8 @@
       <!-- Step 5 -->
       <div class="pane" id="pane-5">
         <p class="pop">—</p>
-        <p class="confirm-title">確定予約が成立しました</p>
+        <p class="confirm-title">予約申し込みが完了しました</p>
+        <p style="text-align:center;color:var(--sub);font-size:14px;line-height:1.9;margin-bottom:26px">アップロードいただいた画像の確認（認証）が完了しましたら、正式に予約確定となります。<br>確定のご連絡は、マイページとInstagramのDMでお送りします。</p>
         <div class="keybox">
           <p class="k-title">スマホキーは、ご利用日の2日前にお送りします</p>
           <p>招待リンクをマイページとInstagramのDMでお送りします。当日はそのキーで解錠して、そのまま出発できます。終了時刻を5分過ぎるとキーは自動で無効化されます。延長をご希望の場合は、マイページから延長料金（1時間 ¥2,500、1〜5時間まで選択可）のお手続きをお願いします。</p>
@@ -665,7 +667,6 @@
   <h3>お問い合わせ</h3>
   <p>ご予約の相談・保険の加入者証の送付・ご質問は、InstagramのDMで受け付けています。お気軽にメッセージください。</p>
   <a class="ig-btn" href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>@tesla_model3.chuo にDMする</a>
-  <p class="fineprint">プロフィール：<a href="https://www.instagram.com/tesla_model3.chuo" target="_blank" rel="noopener" style="color:var(--sub)">instagram.com/tesla_model3.chuo</a></p>
 </section>
 
 <footer>
@@ -919,7 +920,7 @@
       var done = function(){
         booking.insuranceUploaded = true;
         document.getElementById("err-4").style.display = "none";
-        status.textContent = "アップロードしました。内容を確認します。問題なければこのまま「予約を確定する」へお進みください。";
+        status.textContent = "アップロードしました。内容を確認します。問題なければこのまま「予約を申し込む」へお進みください。";
       };
       if(window.AmpAuth && AmpAuth.uploadInsurance){
         AmpAuth.uploadInsurance(dataUrl).then(function(){ done(); }).catch(function(){ done(); });
