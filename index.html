@@ -503,7 +503,19 @@
           </ul>
         </div>
 
-        <p class="fineprint" style="margin-bottom:18px">保険はPayPayほけん「あんしんドライブ」を推奨していますが、その他のワンデー保険でもお受けできます（加入確認のステップで選択できます）。詳細はご相談ください。</p>
+        <p style="font-size:13.5px;color:var(--sub);margin:28px 0 12px">加入する保険をお選びください。</p>
+        <div class="ins-opt selected" id="ins-paypay" onclick="selectInsurer('paypay')">PayPayほけん「あんしんドライブ」<small>タイムラグがなく、その場で加入できます（推奨）</small></div>
+        <div class="ins-opt" id="ins-other" onclick="selectInsurer('other')">その他のワンデー保険<small>ちょいのり保険など、他社のワンデー保険で加入される方</small></div>
+        <div id="ins-other-fields">
+          <input type="text" id="ins-company" placeholder="保険会社名（例：東京海上日動）">
+          <select id="ins-vehicle">
+            <option value="">車両補償の内容を選択してください</option>
+            <option value="full">車両補償あり（単独事故も対象）</option>
+            <option value="partial">車両補償あり（単独事故は対象外）</option>
+            <option value="none">車両補償なし</option>
+          </select>
+          <p style="font-size:12.5px;color:var(--faint);line-height:1.8">保険会社によっては事前登録が必要で、当日は加入できない場合があります。ご利用日までに余裕を持って加入手続きを完了してください。保険料は、ご加入の保険会社へ直接お支払いください。</p>
+        </div>
         <div id="plan-notice">
           <p class="w-title" id="plan-notice-title"></p>
           <p id="plan-notice-text"></p>
@@ -577,38 +589,24 @@
         <dl class="summary" style="margin-bottom:26px">
           <div class="row"><dt>Plan</dt><dd id="sum-plan">—</dd></div>
           <div class="row"><dt>Fee</dt><dd id="sum-fee">—</dd></div>
+          <div class="row"><dt>保険</dt><dd id="sum-insurer">—</dd></div>
           <div class="row"><dt>Vehicle No.</dt><dd>品川 342 り 802</dd></div>
         </dl>
         <p style="font-size:14px;color:var(--sub)">
           ステップ2で選んだプラン・期間で加入できているかを、スクリーンショットで確認します。まだ加入していない方は、PayPayアプリの「ほけん」から「あんしんドライブ」を選び、上の内容で加入してください（所要約1分）。
         </p>
-        <div style="margin-top:22px">
-          <div class="ins-opt selected" id="ins-paypay" onclick="selectInsurer('paypay')">PayPayほけん「あんしんドライブ」<small>タイムラグがなく、その場で加入できます（推奨）</small></div>
-          <div class="ins-opt" id="ins-other" onclick="selectInsurer('other')">その他のワンデー保険<small>ちょいのり保険など、他社のワンデー保険で加入済みの方</small></div>
-          <div id="ins-other-fields">
-            <input type="text" id="ins-company" placeholder="保険会社名（例：東京海上日動）">
-            <select id="ins-vehicle">
-              <option value="">車両補償の内容を選択してください</option>
-              <option value="full">車両補償あり（単独事故も対象）</option>
-              <option value="partial">車両補償あり（単独事故は対象外）</option>
-              <option value="none">車両補償なし</option>
-            </select>
-            <p style="font-size:12.5px;color:var(--faint);line-height:1.8">保険会社によっては事前登録が必要で、当日は加入できない場合があります。ご利用日までに余裕を持って加入手続きを完了してください。保険料は、ご加入の保険会社へ直接お支払いください。加入内容（保険期間・車両ナンバー・被保険者名・補償内容）が分かる画面のスクリーンショットを、下のボタンからアップロードしてください。</p>
-          </div>
-        </div>
         <div class="warnbox" style="margin-top:20px">
           <p class="w-title">期間とプランの選択にご注意ください</p>
           <p>プランを選択したページの下の方に、期間（開始日時と長さ）を選択する画面が出てきます。ご予約の日時・プランと一致しているか、必ずご確認ください。内容は自動で文字認識・照合しているため、条件が異なるとご予約をお通しできません。時間に余裕を持ってお申し込みください。なお、不一致があった場合は相違点をご連絡しますので、修正のうえ再度アップロードしてください。</p>
         </div>
-        <p style="margin-top:22px">
+        <p style="margin-top:22px" id="paypay-join-btn">
           <a class="btn-main" style="text-decoration:none" href="https://www.paypay-insurance.co.jp/promotion/car/app/" target="_blank" rel="noopener">PayPayほけん「あんしんドライブ」加入ページへ</a>
         </p>
         <p style="margin-top:18px">
           <a class="link-quiet" href="https://paypay.ne.jp/article/0077/" target="_blank" rel="noopener">あんしんドライブについて（PayPay）</a>
         </p>
-        <p class="fineprint" style="margin-top:14px">タイムラグがないので、PayPayほけん「あんしんドライブ」を推奨していますが、その他のワンデー保険でもお受けできます。詳細はご相談ください。</p>
         <p style="font-size:14px;color:var(--sub);margin-top:26px">
-          加入が完了したら、申込完了画面の右下にある<b style="color:var(--text)">【加入詳細】</b>ボタンをタップし、ご本人様のお名前・車両ナンバー・保険期間が表示された画面のスクリーンショットを、下のボタンからアップロードしてください。内容を確認でき次第、予約成立となります。
+          加入が完了したら、加入内容（ご本人様のお名前・車両ナンバー・保険期間）が表示された画面のスクリーンショットを、下のボタンからアップロードしてください。内容を確認でき次第、予約成立となります。
         </p>
         <figure class="fig" style="margin-top:18px">
           <img src="insurance-example.svg" alt="加入詳細画面の見本イラスト" style="width:250px;max-width:70vw;height:auto">
@@ -936,15 +934,6 @@
   }
   function goStep5Check(){
     var err = document.getElementById("err-4");
-    if(booking.insurer === "other"){
-      var company = document.getElementById("ins-company").value.trim();
-      var vehicle = document.getElementById("ins-vehicle").value;
-      if(!company || !vehicle){
-        err.textContent = "保険会社名と車両補償の内容を入力してください";
-        err.style.display = "block";
-        return;
-      }
-    }
     if(!booking.insuranceUploaded){
       err.textContent = "スクリーンショットのアップロードをお願いします";
       err.style.display = "block";
@@ -953,17 +942,33 @@
     goStep(5);
   }
   function goStep3(){
-    if(!booking.plan){ document.getElementById("err-2").style.display = "block"; return; }
+    var err2 = document.getElementById("err-2");
+    if(!booking.plan){ err2.textContent = "保険プランを選んでください。"; err2.style.display = "block"; return; }
+    if(booking.insurer === "other"){
+      var company = document.getElementById("ins-company").value.trim();
+      var vehicle = document.getElementById("ins-vehicle").value;
+      if(!company || !vehicle){ err2.textContent = "保険会社名と車両補償の内容を入力してください。"; err2.style.display = "block"; return; }
+      booking.insurerCompany = company;
+      booking.insurerVehicle = vehicle;
+    }
+    err2.style.display = "none";
     document.getElementById("id-date").textContent = fmtDate(booking.date) + " " + booking.time + "〜（" + booking.dur + "時間）";
     document.getElementById("id-price").textContent = booking.rate ? ("¥" + booking.rate.toLocaleString() + (isWE(booking.date) ? "（土日祝）" : "（平日）")) : "—";
     var p3 = PLANS[booking.plan];
     document.getElementById("id-ins").textContent = p3 ? (p3.name + " ¥" + insFee().toLocaleString() + "（PayPayで別途）") : "—";
     goStep(3);
   }
+  var VEHICLE_LABELS = {full: "車両補償あり（単独事故も対象）", partial: "車両補償あり（単独事故は対象外）", none: "車両補償なし"};
   function goStep4(){
     var p = PLANS[booking.plan];
     document.getElementById("sum-plan").textContent = p.name;
     document.getElementById("sum-fee").textContent = booking.dur >= 24 ? ("24時間 ¥" + p.fee24.toLocaleString()) : ("12時間 ¥" + p.fee12.toLocaleString());
+    if(booking.insurer === "other"){
+      document.getElementById("sum-insurer").textContent = "その他のワンデー保険（" + (booking.insurerCompany || "—") + "／" + (VEHICLE_LABELS[booking.insurerVehicle] || "—") + "）";
+    } else {
+      document.getElementById("sum-insurer").textContent = "PayPayほけん「あんしんドライブ」";
+    }
+    document.getElementById("paypay-join-btn").style.display = booking.insurer === "other" ? "none" : "";
     goStep(4);
   }
   function goStep(n){
