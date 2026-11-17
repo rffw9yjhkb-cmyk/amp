@@ -83,6 +83,16 @@
   .dm-btn:hover{background:var(--text);color:#fff}
   .dm-btn svg{flex:none}
 
+  /* ===== Emergency ===== */
+  .emergency{border:2px solid var(--text);background:var(--panel);padding:clamp(24px,5vw,38px);text-align:center}
+  .emergency .e-title{font-size:17px;font-weight:500;letter-spacing:.18em;margin-bottom:12px}
+  .emergency p.e-text{font-size:13.5px;color:var(--sub);line-height:1.9;letter-spacing:.03em}
+  .emergency p.e-text b{color:var(--text);font-weight:500}
+  .emg-btn{display:inline-flex;align-items:center;gap:10px;margin-top:20px;background:var(--text);color:#0B0B0B;
+    padding:16px 34px;font-size:15px;font-weight:500;letter-spacing:.14em;text-decoration:none;transition:.25s}
+  .emg-btn:hover{opacity:.85}
+  .emg-btn svg{flex:none}
+
   /* ===== Key box ===== */
   .keybox{border:1px solid var(--line);background:var(--panel);padding:clamp(24px,5vw,40px)}
   .keybox p{font-size:14px;color:var(--sub);letter-spacing:.03em}
@@ -90,6 +100,8 @@
   .keybox .k-time{font-size:clamp(22px,5.4vw,30px);font-weight:200;letter-spacing:.08em;color:var(--text);margin:6px 0 14px}
 
   .fineprint{font-size:12px;color:var(--faint);margin-top:18px}
+  .link-quiet{color:var(--sub);font-size:13px;letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px}
+  .link-quiet:hover{color:var(--text)}
 
   /* ===== Footer ===== */
   footer{border-top:1px solid var(--line);padding:44px 5vw 56px;max-width:720px;margin:0 auto}
@@ -128,6 +140,15 @@
         <div class="row"><dt>Pick-up</dt><dd>東京都中央区湊3-13-11</dd></div>
       </dl>
       <p class="fineprint">受け渡しは非対面です。返却も同じ場所へお願いします。</p>
+    </div>
+  </section>
+
+  <!-- ===== Emergency ===== -->
+  <section class="blk">
+    <div class="emergency">
+      <p class="e-title">トラブル・緊急のとき</p>
+      <p class="e-text">事故・故障・トラブルが発生したら、<b>保険会社へ連絡する前に、まずオーナーへご連絡ください。</b><br>ケガ人がいる場合など、人命に関わるときは迷わず警察（110）・救急（119）へ連絡してください。</p>
+      <a class="emg-btn" href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>緊急連絡する（Instagram DM）</a>
     </div>
   </section>
 
@@ -192,6 +213,11 @@
       <p>スマホキーの招待リンクは、ご利用開始時刻にお送りします。</p>
       <p class="k-time">2026年11月30日 06:00</p>
       <p>招待リンクは <b>InstagramのDM</b> でお送りします。リンクを開いてTeslaアプリにドライバー登録すると、お車を解錠・そのまま出発できます。<b>開始時刻になっても届かない場合は、DMにてお急ぎご連絡ください。</b></p>
+      <p style="margin-top:18px">キーの受け取りには<b>Teslaアプリ</b>が必要です。まだの方は、ご利用日までにインストールをお願いします。</p>
+      <p style="margin-top:12px">
+        <a class="link-quiet" href="https://apps.apple.com/app/tesla/id582007913" target="_blank" rel="noopener" style="margin-right:22px">iPhoneの方（App Store）</a>
+        <a class="link-quiet" href="https://play.google.com/store/apps/details?id=com.teslamotors.tesla" target="_blank" rel="noopener">Androidの方（Google Play）</a>
+      </p>
     </div>
   </section>
 
