@@ -160,7 +160,9 @@
   .warnbox ul{list-style:none;margin-top:6px}
   .warnbox li{font-size:13px;color:var(--sub);padding:3px 0;letter-spacing:.03em}
   .warnbox li::before{content:"— "}
-  table.cmp{width:100%;border-collapse:collapse;margin:6px 0 26px;font-size:13px}
+  table.cmp{width:100%;border-collapse:collapse;margin:6px 0 26px;font-size:13px;table-layout:fixed}
+  table.cmp th:first-child,table.cmp td:first-child{width:40%}
+  table.cmp th:not(:first-child),table.cmp td:not(:first-child){width:20%}
   table.cmp th,table.cmp td{border:1px solid var(--line2);padding:10px 8px;text-align:center;letter-spacing:.03em}
   table.cmp th{background:var(--panel);color:var(--text);font-weight:400}
   table.cmp td:first-child{text-align:left;color:var(--sub)}
