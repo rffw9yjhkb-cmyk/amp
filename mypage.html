@@ -34,6 +34,8 @@
   /* ===== Greeting ===== */
   .greet{font-size:clamp(24px,6vw,32px);font-weight:200;letter-spacing:.1em;line-height:1.5}
   .greet-sub{color:var(--sub);font-size:13px;margin-top:10px;letter-spacing:.04em}
+  .copy-btn{margin-left:12px;border:1px solid var(--line2);background:none;color:var(--sub);font-size:11px;letter-spacing:.12em;padding:5px 12px;cursor:pointer;font-family:inherit;vertical-align:middle}
+  .copy-btn:hover{border-color:var(--text);color:var(--text)}
   .bno{display:inline-block;margin-top:20px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;
     border:1px solid var(--line2);padding:6px 14px;color:var(--sub)}
   .bno b{color:var(--text);font-weight:400}
@@ -129,7 +131,7 @@
     <p class="slabel">My Page — ご予約内容</p>
     <h1 class="greet">山田 太郎 様</h1>
     <p class="greet-sub">ご予約ありがとうございます。ご利用内容と当日のご案内をまとめました。</p>
-    <p class="bno">Booking No. <b>AMP-2026-0007</b></p>
+    <p class="bno">Booking No. <b>AMP-2026-0007</b><button class="copy-btn" type="button" data-copy="AMP-2026-0007" onclick="copyBookingNo(this)">コピー</button></p>
   </section>
 
   <!-- ===== Reservation ===== -->
@@ -161,7 +163,7 @@
         <li><span class="s-name">利用中</span><span class="s-en">In Use</span></li>
         <li><span class="s-name">返却完了</span><span class="s-en">Returned</span></li>
       </ol>
-      <p class="status-note">現在のステータス：<b>保険確認が完了しました</b>。次に、予約確定のご連絡をお送りします。スマホキーはご利用日の2日前から、このマイページで開けるようになります。<br>本人確認がお済みでない方は、上の「本人確認」からStripeの本人確認ページへ進めます。</p>
+      <p class="status-note">現在のステータス：<b>保険確認が完了しました</b>。次に、予約確定のご連絡をお送りします。スマホキーはご利用開始の3時間前から、このマイページで開けるようになります。<br>本人確認がお済みでない方は、上の「本人確認」からStripeの本人確認ページへ進めます。</p>
     </div>
     <nav class="mypage-nav">
       <a href="#emergency">トラブルの場合</a>
@@ -176,7 +178,7 @@
     <div class="emergency">
       <p class="e-title">トラブル・緊急のとき</p>
       <p class="e-text">事故・故障・トラブルが発生したら、<b>保険会社へ連絡する前に、まずオーナーへご連絡ください。</b><br>ケガ人がいる場合など、人命に関わるときは迷わず警察（110）・救急（119）へ連絡してください。</p>
-      <a class="emg-btn" href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>緊急連絡する（Instagram DM）</a>
+      <a class="emg-btn" href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>⚠️ 緊急連絡する（Instagram DM）</a>
     </div>
   </section>
 
@@ -238,8 +240,8 @@
   <section class="blk">
     <p class="slabel">Key — キーの受け取り</p>
     <div class="keybox">
-      <p>スマホキーは、ご利用日の2日前から、このマイページで開けます。</p>
-      <p class="k-time">2026年11月28日（土）から</p>
+      <p>スマホキーは、ご利用開始の3時間前から、このマイページで開けます。</p>
+      <p class="k-time">2026年11月30日（月）03:00から</p>
       <a class="emg-btn" href="#" onclick="return false" style="margin:6px 0 16px">スマホキーを開く</a>
       <p>ボタンを押してTeslaアプリにドライバー登録すると、お車を解錠・そのまま出発できます。</p>
       <p style="margin-top:18px">キーの受け取りには<b>Teslaアプリ</b>が必要です。まだの方は、ご利用日までにインストールをお願いします。</p>
@@ -268,5 +270,25 @@
   <p style="margin-top:14px">※ 本ページはプロトタイプです。表示内容はすべてサンプルデータです。</p>
 </footer>
 
+<script>
+function copyBookingNo(btn){
+  var text = btn.getAttribute('data-copy');
+  function done(){
+    var old = btn.textContent;
+    btn.textContent = 'コピーしました';
+    setTimeout(function(){ btn.textContent = old; }, 1600);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(); });
+  } else { fallback(); }
+  function fallback(){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+}
+</script>
 </body>
 </html>
