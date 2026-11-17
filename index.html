@@ -139,6 +139,12 @@
 
   /* Plan options */
   .plan-opt{border:1px solid var(--line);background:transparent;padding:26px;margin-bottom:14px;cursor:pointer;transition:border-color .3s}
+  .ins-opt{border:1px solid var(--line);background:transparent;padding:16px 20px;margin-bottom:10px;cursor:pointer;font-size:14px;letter-spacing:.04em}
+  .ins-opt.selected{border-color:var(--text);background:var(--panel)}
+  .ins-opt small{display:block;color:var(--faint);font-size:12px;margin-top:4px}
+  #ins-other-fields{display:none;margin-top:16px}
+  #ins-other-fields input[type="text"]{width:100%;background:#0c0c0c;border:1px solid var(--line2);color:var(--text);padding:12px;font-size:14px;margin-bottom:12px}
+  #ins-other-fields select{width:100%;background:#0c0c0c;border:1px solid var(--line2);color:var(--text);padding:12px;font-size:14px;margin-bottom:12px}
   .plan-opt:hover{border-color:#3d3d3d}
   .plan-opt.selected{border-color:var(--text)}
   .plan-opt.dim{opacity:.18}
@@ -573,6 +579,20 @@
         <p style="font-size:14px;color:var(--sub)">
           ステップ2で選んだプラン・期間で加入できているかを、スクリーンショットで確認します。まだ加入していない方は、PayPayアプリの「ほけん」から「あんしんドライブ」を選び、上の内容で加入してください（所要約1分）。
         </p>
+        <div style="margin-top:22px">
+          <div class="ins-opt selected" id="ins-paypay" onclick="selectInsurer('paypay')">PayPayほけん「あんしんドライブ」<small>タイムラグがなく、その場で加入できます（推奨）</small></div>
+          <div class="ins-opt" id="ins-other" onclick="selectInsurer('other')">その他のワンデー保険<small>ちょいのり保険など、他社のワンデー保険で加入済みの方</small></div>
+          <div id="ins-other-fields">
+            <input type="text" id="ins-company" placeholder="保険会社名（例：東京海上日動）">
+            <select id="ins-vehicle">
+              <option value="">車両補償の内容を選択してください</option>
+              <option value="full">車両補償あり（単独事故も対象）</option>
+              <option value="partial">車両補償あり（単独事故は対象外）</option>
+              <option value="none">車両補償なし</option>
+            </select>
+            <p style="font-size:12.5px;color:var(--faint);line-height:1.8">保険会社によっては事前登録が必要で、当日は加入できない場合があります。ご利用日までに余裕を持って加入手続きを完了してください。保険料は、ご加入の保険会社へ直接お支払いください。加入内容（保険期間・車両ナンバー・被保険者名・補償内容）が分かる画面のスクリーンショットを、下のボタンからアップロードしてください。</p>
+          </div>
+        </div>
         <div class="warnbox" style="margin-top:20px">
           <p class="w-title">期間とプランの選択にご注意ください</p>
           <p>プランを選択したページの下の方に、期間（開始日時と長さ）を選択する画面が出てきます。ご予約の日時・プランと一致しているか、必ずご確認ください。内容は自動で文字認識・照合しているため、条件が異なるとご予約をお通しできません。時間に余裕を持ってお申し込みください。なお、不一致があった場合は相違点をご連絡しますので、修正のうえ再度アップロードしてください。</p>
@@ -598,6 +618,7 @@
           <img id="ins-preview" alt="" style="display:none;max-width:250px;width:70vw;height:auto;margin-top:12px;border:1px solid var(--line2)">
           <p class="err" id="err-4" style="display:none">スクリーンショットのアップロードをお願いします</p>
         </div>
+        <p style="font-size:13px;color:var(--sub);margin-top:24px;border:1px solid var(--line2);padding:14px 16px;line-height:1.85">なお、保険でカバーされなかった費用（免責分・上限を超えた分・対象外の損害など）は、理由にかかわらず<b style="color:var(--text)">実費で精算</b>いただきます。</p>
         <div class="btn-row">
           <button class="btn-ghost" onclick="goStep(3)">戻る</button>
           <button class="btn-main" onclick="goStep5Check()">予約を確定する</button>
@@ -904,9 +925,26 @@
     };
     img.src = URL.createObjectURL(f);
   }
+  function selectInsurer(kind){
+    booking.insurer = kind;
+    document.getElementById("ins-paypay").classList.toggle("selected", kind === "paypay");
+    document.getElementById("ins-other").classList.toggle("selected", kind === "other");
+    document.getElementById("ins-other-fields").style.display = kind === "other" ? "block" : "none";
+  }
   function goStep5Check(){
+    var err = document.getElementById("err-4");
+    if(booking.insurer === "other"){
+      var company = document.getElementById("ins-company").value.trim();
+      var vehicle = document.getElementById("ins-vehicle").value;
+      if(!company || !vehicle){
+        err.textContent = "保険会社名と車両補償の内容を入力してください";
+        err.style.display = "block";
+        return;
+      }
+    }
     if(!booking.insuranceUploaded){
-      document.getElementById("err-4").style.display = "block";
+      err.textContent = "スクリーンショットのアップロードをお願いします";
+      err.style.display = "block";
       return;
     }
     goStep(5);
