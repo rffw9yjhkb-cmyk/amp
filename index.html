@@ -586,14 +586,17 @@
       <!-- Step 4 -->
       <div class="pane" id="pane-4">
         <h3>保険の加入確認</h3>
+        <p style="font-size:14px;color:var(--text);margin-bottom:14px">あなたが選択したのは、こちらの内容です。</p>
         <dl class="summary" style="margin-bottom:26px">
-          <div class="row"><dt>Plan</dt><dd id="sum-plan">—</dd></div>
-          <div class="row"><dt>Fee</dt><dd id="sum-fee">—</dd></div>
+          <div class="row"><dt>プラン</dt><dd id="sum-plan">—</dd></div>
+          <div class="row"><dt>期間</dt><dd id="sum-period">—</dd></div>
+          <div class="row"><dt>プラン内容</dt><dd id="sum-coverage">—</dd></div>
+          <div class="row"><dt>保険料</dt><dd id="sum-fee">—</dd></div>
           <div class="row"><dt>保険</dt><dd id="sum-insurer">—</dd></div>
-          <div class="row"><dt>Vehicle No.</dt><dd>品川 342 り 802</dd></div>
+          <div class="row"><dt>車両ナンバー</dt><dd>品川 342 り 802</dd></div>
         </dl>
         <p style="font-size:14px;color:var(--sub)">
-          ステップ2で選んだプラン・期間で加入できているかを、スクリーンショットで確認します。まだ加入していない方は、PayPayアプリの「ほけん」から「あんしんドライブ」を選び、上の内容で加入してください（所要約1分）。
+          この内容で加入できているかを、スクリーンショットで確認します。まだ加入していない方は、上の内容で加入してください。
         </p>
         <div class="warnbox" style="margin-top:20px">
           <p class="w-title">期間とプランの選択にご注意ください</p>
@@ -959,9 +962,22 @@
     goStep(3);
   }
   var VEHICLE_LABELS = {full: "車両補償あり（単独事故も対象）", partial: "車両補償あり（単独事故は対象外）", none: "車両補償なし"};
+  var COVERAGE = {
+    ote: "対人・対物：無制限／車両補償：なし",
+    kihon: "対人・対物：無制限／車両補償：上限300万円・免責15万円（単独事故は対象外）",
+    anshin: "対人・対物：無制限／車両補償：上限300万円・免責15万円（単独事故も対象）"
+  };
   function goStep4(){
     var p = PLANS[booking.plan];
     document.getElementById("sum-plan").textContent = p.name;
+    var dp = (booking.date || "").split("-");
+    var tp = (booking.time || "0:00").split(":");
+    var start = new Date(parseInt(dp[0],10), parseInt(dp[1],10)-1, parseInt(dp[2],10), parseInt(tp[0],10), parseInt(tp[1],10));
+    var end = new Date(start.getTime() + booking.dur * 3600000);
+    function hm(d){ return d.getHours() + ":" + ("0" + d.getMinutes()).slice(-2); }
+    var nextDay = end.getDate() !== start.getDate() ? "（翌日）" : "";
+    document.getElementById("sum-period").textContent = fmtDate(booking.date) + " " + booking.time + "〜" + hm(end) + nextDay + "（" + booking.dur + "時間）";
+    document.getElementById("sum-coverage").textContent = COVERAGE[booking.plan] || "—";
     document.getElementById("sum-fee").textContent = booking.dur >= 24 ? ("24時間 ¥" + p.fee24.toLocaleString()) : ("12時間 ¥" + p.fee12.toLocaleString());
     if(booking.insurer === "other"){
       document.getElementById("sum-insurer").textContent = "その他のワンデー保険（" + (booking.insurerCompany || "—") + "／" + (VEHICLE_LABELS[booking.insurerVehicle] || "—") + "）";
