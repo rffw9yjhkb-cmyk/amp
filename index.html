@@ -166,6 +166,7 @@
   table.cmp th,table.cmp td{border:1px solid var(--line2);padding:10px 8px;text-align:center;letter-spacing:.03em}
   table.cmp th{background:var(--panel);color:var(--text);font-weight:400}
   table.cmp td:first-child{text-align:left;color:var(--sub)}
+  table.cmp .cmp-sub{display:block;font-size:11px;color:var(--faint);margin-top:2px;letter-spacing:.02em}
   table.cmp td.ng{color:#777}
   #plan-notice{display:none;border:1px solid var(--text);background:var(--panel);padding:20px 24px;margin:4px 0 18px}
   #plan-notice .w-title{font-size:14px;font-weight:400;letter-spacing:.14em;margin-bottom:8px}
@@ -414,13 +415,13 @@
 
         <table class="cmp">
           <tr><th></th><th>お手軽</th><th>基本</th><th>安心</th></tr>
-          <tr><td>相手への賠償（対人・対物）</td><td>○ 無制限</td><td>○ 無制限</td><td>○ 無制限</td></tr>
-          <tr><td>車同士の事故による車の損害</td><td class="ng">✕</td><td>○</td><td>○</td></tr>
-          <tr><td>単独事故による車の損害</td><td class="ng">✕</td><td class="ng">✕</td><td>○</td></tr>
-          <tr><td>ケガの補償（搭乗者傷害など）</td><td>○</td><td>○</td><td>○</td></tr>
+          <tr><td>相手への賠償<span class="cmp-sub">対人・対物</span></td><td>○ 無制限</td><td>○ 無制限</td><td>○ 無制限</td></tr>
+          <tr><td>車同士の事故による<span class="cmp-sub">車体の損害</span></td><td class="ng">✕</td><td>○</td><td>○</td></tr>
+          <tr><td>単独事故による<span class="cmp-sub">車体の損害</span></td><td class="ng">✕</td><td class="ng">✕</td><td>○</td></tr>
+          <tr><td>ケガの補償<span class="cmp-sub">搭乗者傷害など</span></td><td>○</td><td>○</td><td>○</td></tr>
           <tr><td>ロードサービス</td><td>○</td><td>○</td><td>○</td></tr>
-          <tr><td>車両補償の上限</td><td class="ng">—（補償なし）</td><td>300万円</td><td>300万円</td></tr>
-          <tr><td>免責（自己負担額）</td><td class="ng">—</td><td>15万円</td><td>15万円</td></tr>
+          <tr><td>車両補償の上限</td><td class="ng">—<span class="cmp-sub">補償なし</span></td><td>300万円</td><td>300万円</td></tr>
+          <tr><td>免責<span class="cmp-sub">自己負担額</span></td><td class="ng">—</td><td>15万円</td><td>15万円</td></tr>
         </table>
 
         <div id="plan-ote" class="plan-opt" onclick="selectPlan('ote')">
