@@ -168,6 +168,7 @@
   table.cmp th{background:var(--panel);color:var(--text);font-weight:400}
   table.cmp td:first-child{text-align:left;color:var(--sub)}
   table.cmp .cmp-sub{display:block;font-size:11px;color:var(--faint);margin-top:2px;letter-spacing:.02em}
+  table.cmp .cmp-sub.big{font-size:13px;color:var(--sub);margin-top:0}
   table.cmp td.ng{color:#777}
   #plan-notice{display:none;border:2px solid var(--text);background:#111;padding:22px 24px;margin:4px 0 18px}
   #plan-notice .w-title{font-size:15px;font-weight:700;letter-spacing:.1em;margin-bottom:8px}
@@ -423,9 +424,9 @@
 
         <table class="cmp">
           <tr><th></th><th>お手軽</th><th>基本</th><th>安心</th></tr>
-          <tr><td>相手への賠償<span class="cmp-sub">対人・対物</span></td><td>○ 無制限</td><td>○ 無制限</td><td>○ 無制限</td></tr>
-          <tr><td>車同士の事故による<span class="cmp-sub">車体の損害</span></td><td class="ng">✕</td><td>○</td><td>○</td></tr>
-          <tr><td>単独事故による<span class="cmp-sub">車体の損害</span></td><td class="ng">✕</td><td class="ng">✕</td><td>○</td></tr>
+          <tr><td>相手への賠償<span class="cmp-sub">対人・対物</span></td><td>○<span class="cmp-sub">無制限</span></td><td>○<span class="cmp-sub">無制限</span></td><td>○<span class="cmp-sub">無制限</span></td></tr>
+          <tr><td>車同士の事故による<span class="cmp-sub big">車体の損害</span></td><td class="ng">✕</td><td>○</td><td>○</td></tr>
+          <tr><td>単独事故による<span class="cmp-sub big">車体の損害</span></td><td class="ng">✕</td><td class="ng">✕</td><td>○</td></tr>
           <tr><td>ケガの補償<span class="cmp-sub">搭乗者傷害など</span></td><td>○</td><td>○</td><td>○</td></tr>
           <tr><td>ロードサービス</td><td>○</td><td>○</td><td>○</td></tr>
           <tr><td>車両補償の上限</td><td class="ng">—<span class="cmp-sub">補償なし</span></td><td>300万円</td><td>300万円</td></tr>
