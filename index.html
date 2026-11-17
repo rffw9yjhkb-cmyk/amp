@@ -142,9 +142,6 @@
   .ins-opt{border:1px solid var(--line);background:transparent;padding:16px 20px;margin-bottom:10px;cursor:pointer;font-size:14px;letter-spacing:.04em}
   .ins-opt.selected{border-color:var(--text);background:var(--panel)}
   .ins-opt small{display:block;color:var(--faint);font-size:12px;margin-top:4px}
-  #ins-other-fields{display:none;margin-top:16px}
-  #ins-other-fields input[type="text"]{width:100%;background:#0c0c0c;border:1px solid var(--line2);color:var(--text);padding:12px;font-size:14px;margin-bottom:12px}
-  #ins-other-fields select{width:100%;background:#0c0c0c;border:1px solid var(--line2);color:var(--text);padding:12px;font-size:14px;margin-bottom:12px}
   .plan-opt:hover{border-color:#3d3d3d}
   .plan-opt.selected{border-color:var(--text)}
   .plan-opt.dim{opacity:.18}
@@ -504,19 +501,17 @@
           </ul>
         </div>
 
-        <p style="font-size:13.5px;color:var(--sub);margin:28px 0 12px">加入する保険をお選びください。</p>
-        <div class="ins-opt selected" id="ins-paypay" onclick="selectInsurer('paypay')">PayPayほけん「あんしんドライブ」<small>タイムラグがなく、その場で加入できます（推奨）</small></div>
-        <div class="ins-opt" id="ins-other" onclick="selectInsurer('other')">その他のワンデー保険<small>ちょいのり保険など、他社のワンデー保険で加入される方</small></div>
-        <div id="ins-other-fields">
-          <input type="text" id="ins-company" placeholder="保険会社名（例：東京海上日動）">
-          <select id="ins-vehicle">
-            <option value="">車両補償の内容を選択してください</option>
-            <option value="full">車両補償あり（単独事故も対象）</option>
-            <option value="partial">車両補償あり（単独事故は対象外）</option>
-            <option value="none">車両補償なし</option>
-          </select>
-          <p style="font-size:12.5px;color:var(--faint);line-height:1.8">保険会社によっては事前登録が必要で、当日は加入できない場合があります。ご利用日までに余裕を持って加入手続きを完了してください。保険料は、ご加入の保険会社へ直接お支払いください。</p>
+        <div id="plan-other" class="plan-opt" onclick="selectPlan('other')">
+          <div class="p-head">
+            <span class="p-name">その他のワンデー保険</span>
+            <span class="p-price">保険料は保険会社により異なります</span>
+          </div>
+          <ul>
+            <li>ちょいのり保険など、PayPayほけん以外で加入される方</li>
+            <li>補償内容は、ご加入の保険の内容に準じます</li>
+          </ul>
         </div>
+
         <div id="plan-notice">
           <p class="w-title" id="plan-notice-title"></p>
           <p id="plan-notice-text"></p>
@@ -844,7 +839,10 @@
     rentEl.textContent = booking.rate ? ("\u00a5" + booking.rate.toLocaleString() + "\uff08" + booking.dur + "\u6642\u9593\u30fb" + (isWE(booking.date) ? "\u571f\u65e5\u795d" : "\u5e73\u65e5") + "\uff09") : "\u2014";
     var insEl = document.getElementById("tot-ins");
     var allEl = document.getElementById("tot-all");
-    if(booking.plan){
+    if(booking.plan === "other"){
+      insEl.textContent = "ご加入の保険により異なります";
+      allEl.textContent = booking.rate ? ("¥" + booking.rate.toLocaleString() + " ＋ 保険料（別途）") : "—";
+    } else if(booking.plan){
       var f = insFee();
       insEl.textContent = "\u00a5" + f.toLocaleString() + "\uff08" + (booking.dur >= 24 ? "24\u6642\u9593" : "12\u6642\u9593") + "\uff09";
       allEl.textContent = booking.rate ? ("\u00a5" + (booking.rate + f).toLocaleString()) : "\u2014";
@@ -876,7 +874,8 @@
   }
   function selectPlan(key){
     booking.plan = key;
-    var keys = ["ote","kihon","anshin"];
+    booking.insurer = key === "other" ? "other" : "paypay";
+    var keys = ["ote","kihon","anshin","other"];
     for(var i=0;i<keys.length;i++){
       document.getElementById("plan-" + keys[i]).classList.toggle("selected", keys[i] === key);
       document.getElementById("plan-" + keys[i]).classList.toggle("dim", keys[i] !== key);
@@ -885,7 +884,8 @@
     var NOTICES = {
       ote:   ["お手軽プランのご注意", "車両補償がないため、単独事故・車同士の事故のどちらでも「車の損害」は補償されません。車を傷つけた場合、修理費は実費精算となります。", "⚠ 車両補償がないため、全損の場合は車両時価の全額（最大で約500万円）が自己負担になります。"],
       kihon: ["基本プランのご注意", "単独事故（壁・柱・ガードレールなど、相手のいない事故）による車の損害は補償されません。駐車場の柱に「コツン」も単独事故です。", "重要な制限：車両補償の上限は300万円、免責（自己負担）は15万円です。上限を超えた分は実費精算となります。"],
-      anshin:["安心プランのご注意", "単独事故も補償対象です。駐車・停車中の損害など対象外のケースは、下記の「補償の対象外となる主なケース」をご確認ください。", "重要な制限：車両補償の上限は300万円、免責（自己負担）は15万円です。上限を超えた分は実費精算となります。"]
+      anshin:["安心プランのご注意", "単独事故も補償対象です。駐車・停車中の損害など対象外のケースは、下記の「補償の対象外となる主なケース」をご確認ください。", "重要な制限：車両補償の上限は300万円、免責（自己負担）は15万円です。上限を超えた分は実費精算となります。"],
+      other: ["その他のワンデー保険のご注意", "補償内容・保険料は、ご加入の保険会社・プランの内容に準じます。ご利用期間をカバーする内容で、ご利用日までに加入手続きを完了してください。保険会社によっては事前登録が必要で、当日は加入できない場合があります。保険料は、ご加入の保険会社へ直接お支払いください。", ""]
     };
     var n = NOTICES[key];
     if(n){
@@ -931,12 +931,6 @@
     };
     img.src = URL.createObjectURL(f);
   }
-  function selectInsurer(kind){
-    booking.insurer = kind;
-    document.getElementById("ins-paypay").classList.toggle("selected", kind === "paypay");
-    document.getElementById("ins-other").classList.toggle("selected", kind === "other");
-    document.getElementById("ins-other-fields").style.display = kind === "other" ? "block" : "none";
-  }
   function goStep5Check(){
     var err = document.getElementById("err-4");
     if(!booking.insuranceUploaded){
@@ -949,21 +943,13 @@
   function goStep3(){
     var err2 = document.getElementById("err-2");
     if(!booking.plan){ err2.textContent = "保険プランを選んでください。"; err2.style.display = "block"; return; }
-    if(booking.insurer === "other"){
-      var company = document.getElementById("ins-company").value.trim();
-      var vehicle = document.getElementById("ins-vehicle").value;
-      if(!company || !vehicle){ err2.textContent = "保険会社名と車両補償の内容を入力してください。"; err2.style.display = "block"; return; }
-      booking.insurerCompany = company;
-      booking.insurerVehicle = vehicle;
-    }
     err2.style.display = "none";
     document.getElementById("id-date").textContent = fmtDate(booking.date) + " " + booking.time + "〜（" + booking.dur + "時間）";
     document.getElementById("id-price").textContent = booking.rate ? ("¥" + booking.rate.toLocaleString() + (isWE(booking.date) ? "（土日祝）" : "（平日）")) : "—";
     var p3 = PLANS[booking.plan];
-    document.getElementById("id-ins").textContent = p3 ? (p3.name + " ¥" + insFee().toLocaleString() + "（PayPayで別途）") : "—";
+    document.getElementById("id-ins").textContent = booking.plan === "other" ? "その他のワンデー保険（保険会社へ直接お支払い）" : (p3 ? (p3.name + " ¥" + insFee().toLocaleString() + "（PayPayで別途）") : "—");
     goStep(3);
   }
-  var VEHICLE_LABELS = {full: "車両補償あり（単独事故も対象）", partial: "車両補償あり（単独事故は対象外）", none: "車両補償なし"};
   var COVERAGE = {
     ote: "対人・対物：無制限／車両補償：なし",
     kihon: "対人・対物：無制限／車両補償：上限300万円・免責15万円（単独事故は対象外）",
@@ -971,7 +957,7 @@
   };
   function goStep4(){
     var p = PLANS[booking.plan];
-    document.getElementById("sum-plan").textContent = p.name;
+    document.getElementById("sum-plan").textContent = booking.plan === "other" ? "その他のワンデー保険" : p.name;
     var dp = (booking.date || "").split("-");
     var tp = (booking.time || "0:00").split(":");
     var start = new Date(parseInt(dp[0],10), parseInt(dp[1],10)-1, parseInt(dp[2],10), parseInt(tp[0],10), parseInt(tp[1],10));
@@ -979,13 +965,9 @@
     function hm(d){ return d.getHours() + ":" + ("0" + d.getMinutes()).slice(-2); }
     var nextDay = end.getDate() !== start.getDate() ? "（翌日）" : "";
     document.getElementById("sum-period").textContent = fmtDate(booking.date) + " " + booking.time + "〜" + hm(end) + nextDay + "（" + booking.dur + "時間）";
-    document.getElementById("sum-coverage").textContent = COVERAGE[booking.plan] || "—";
-    document.getElementById("sum-fee").textContent = booking.dur >= 24 ? ("24時間 ¥" + p.fee24.toLocaleString()) : ("12時間 ¥" + p.fee12.toLocaleString());
-    if(booking.insurer === "other"){
-      document.getElementById("sum-insurer").textContent = "その他のワンデー保険（" + (booking.insurerCompany || "—") + "／" + (VEHICLE_LABELS[booking.insurerVehicle] || "—") + "）";
-    } else {
-      document.getElementById("sum-insurer").textContent = "PayPayほけん「あんしんドライブ」";
-    }
+    document.getElementById("sum-coverage").textContent = booking.plan === "other" ? "ご加入の保険の内容に準じます" : (COVERAGE[booking.plan] || "—");
+    document.getElementById("sum-fee").textContent = booking.plan === "other" ? "ご加入の保険により異なります" : (booking.dur >= 24 ? ("24時間 ¥" + p.fee24.toLocaleString()) : ("12時間 ¥" + p.fee12.toLocaleString()));
+    document.getElementById("sum-insurer").textContent = booking.insurer === "other" ? "その他のワンデー保険" : "PayPayほけん「あんしんドライブ」";
     document.getElementById("paypay-join-btn").style.display = booking.insurer === "other" ? "none" : "";
     goStep(4);
   }
@@ -1001,7 +983,7 @@
       document.getElementById("cf-time").textContent = booking.time;
       document.getElementById("cf-dur").textContent = booking.dur + "時間";
       document.getElementById("cf-price").textContent = booking.rate ? ("¥" + booking.rate.toLocaleString() + (isWE(booking.date) ? "（土日祝）" : "（平日）")) : "—";
-      document.getElementById("cf-plan").textContent = p ? p.name : "—";
+      document.getElementById("cf-plan").textContent = booking.plan === "other" ? "その他のワンデー保険" : (p ? p.name : "—");
       var regs = [];
       var authOn = !!(window.AmpAuth && AmpAuth.configured());
       if(booking.reg.passkey) regs.push("パスキー" + (authOn ? (regState.passkey ? "（登録済み）" : "（未登録）") : ""));
