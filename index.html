@@ -169,9 +169,13 @@
   table.cmp td:first-child{text-align:left;color:var(--sub)}
   table.cmp .cmp-sub{display:block;font-size:11px;color:var(--faint);margin-top:2px;letter-spacing:.02em}
   table.cmp td.ng{color:#777}
-  #plan-notice{display:none;border:1px solid var(--text);background:var(--panel);padding:20px 24px;margin:4px 0 18px}
-  #plan-notice .w-title{font-size:14px;font-weight:400;letter-spacing:.14em;margin-bottom:8px}
-  #plan-notice p{font-size:13px;color:var(--sub)}
+  #plan-notice{display:none;border:2px solid var(--text);background:#111;padding:22px 24px;margin:4px 0 18px}
+  #plan-notice .w-title{font-size:15px;font-weight:700;letter-spacing:.1em;margin-bottom:8px}
+  #plan-notice p{font-size:13.5px;color:var(--sub);line-height:1.85}
+  #plan-notice .n-limit{margin-top:12px;padding-top:12px;border-top:1px solid var(--line2);font-size:14px;font-weight:700;color:var(--text);line-height:1.8}
+  .warnbox.quiet{border-color:#262626;padding:14px 16px}
+  .warnbox.quiet .w-title{font-size:11.5px;color:var(--faint);letter-spacing:.1em;margin-bottom:6px}
+  .warnbox.quiet li,.warnbox.quiet p{font-size:12px;color:var(--faint);line-height:1.8}
   .keybox{border:1px solid var(--text);background:var(--panel);padding:24px;margin:0 auto 26px;max-width:520px;text-align:center}
   .keybox .k-title{font-size:16px;font-weight:400;letter-spacing:.12em;margin-bottom:8px}
   .keybox p{font-size:13px;color:var(--sub)}
@@ -461,11 +465,11 @@
         <div id="plan-notice">
           <p class="w-title" id="plan-notice-title"></p>
           <p id="plan-notice-text"></p>
+          <p class="n-limit" id="plan-notice-limit"></p>
         </div>
 
-        <div class="warnbox">
-          <p class="w-title">重要な制限：車両補償の上限は300万円です</p>
-          <p>基本・安心プランの車両補償は、<b style="color:var(--text)">上限300万円</b>までです。また、事故の際はまず<b style="color:var(--text)">免責15万円</b>が自己負担となります。上限を超えた分と免責分は実費精算となります。</p>
+        <div class="warnbox quiet">
+          <p class="w-title">免責15万円の具体例（基本・安心プラン）</p>
           <ul>
             <li>例1：修理費80万円の場合 → 保険から65万円、自己負担は免責の15万円</li>
             <li>例2：修理費400万円の場合 → 保険は上限の300万円まで、自己負担は100万円</li>
@@ -800,7 +804,6 @@
     if(!booking.reg.passkey && !booking.reg.facebook){ document.getElementById("err-reg").style.display = "block"; return; }
     /* マイページ登録（パスキー/Facebook）をその場で開始。失敗してもウィザードは止めない */
     if(window.AmpAuth){ AmpAuth.onStep1Continue(booking).then(applyRegResult); }
-    document.getElementById("anshin-badge").textContent = booking.dur + "時間のご利用には、安心プランがおすすめです";
     updateInsTotal();
     goStep(2);
   }
@@ -813,14 +816,17 @@
     }
     document.getElementById("err-2").style.display = "none";
     var NOTICES = {
-      ote:   ["お手軽プランで補償されないもの", "車両補償がないため、単独事故・車同士の事故のどちらでも「車の損害」は補償されません。車を傷つけた場合、修理費は実費精算となります。"],
-      kihon: ["基本プランで補償されないもの", "単独事故（壁・柱・ガードレールなど、相手のいない事故）による車の損害は補償されません。駐車場の柱に「コツン」も単独事故です。"],
-      anshin:["安心プランのご注意", "単独事故も補償対象です。ただし、免責15万円の自己負担と、車両補償の上限300万円を超えた分の実費精算があります。"]
+      ote:   ["お手軽プランで補償されないもの", "車両補償がないため、単独事故・車同士の事故のどちらでも「車の損害」は補償されません。車を傷つけた場合、修理費は実費精算となります。", "⚠ 車両補償がないため、全損の場合は車両時価の全額（最大で約500万円）が自己負担になります。"],
+      kihon: ["基本プランで補償されないもの", "単独事故（壁・柱・ガードレールなど、相手のいない事故）による車の損害は補償されません。駐車場の柱に「コツン」も単独事故です。", "重要な制限：車両補償の上限は300万円、免責（自己負担）は15万円です。上限を超えた分は実費精算となります。"],
+      anshin:["安心プランのご注意", "単独事故も補償対象です。駐車・停車中の損害など対象外のケースは、下記の「補償の対象外となる主なケース」をご確認ください。", "重要な制限：車両補償の上限は300万円、免責（自己負担）は15万円です。上限を超えた分は実費精算となります。"]
     };
     var n = NOTICES[key];
     if(n){
       document.getElementById("plan-notice-title").textContent = n[0];
       document.getElementById("plan-notice-text").textContent = n[1];
+      var lim = document.getElementById("plan-notice-limit");
+      lim.textContent = n[2] || "";
+      lim.style.display = n[2] ? "block" : "none";
       document.getElementById("plan-notice").style.display = "block";
     }
     updateInsTotal();
