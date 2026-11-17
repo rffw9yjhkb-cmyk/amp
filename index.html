@@ -305,7 +305,7 @@
         <p class="snum">03</p>
         <div>
           <h4>保険に加入して、スクリーンショットで確認</h4>
-          <p>案内に沿って保険に加入し、加入者証のスクリーンショットをInstagramのDMでお送りください。</p>
+          <p>案内に沿って保険に加入し、加入詳細のスクリーンショットを予約画面からアップロードしてください。</p>
         </div>
       </div>
       <div class="step-row rv">
@@ -546,7 +546,7 @@
         </p>
         <div class="warnbox" style="margin-top:20px">
           <p class="w-title">期間とプランの選択にご注意ください</p>
-          <p>プランを選択したページの下の方に、期間（開始日時と長さ）を選択する画面が出てきます。ご予約の日時・プランと一致しているか、必ずご確認ください。内容は自動で文字認識・照合しているため、条件が異なるとご予約をお通しできません。時間に余裕を持ってお申し込みください。なお、不一致があった場合は、InstagramのDMで相違点をご連絡しますので、修正のうえ再度お送りください。</p>
+          <p>プランを選択したページの下の方に、期間（開始日時と長さ）を選択する画面が出てきます。ご予約の日時・プランと一致しているか、必ずご確認ください。内容は自動で文字認識・照合しているため、条件が異なるとご予約をお通しできません。時間に余裕を持ってお申し込みください。なお、不一致があった場合は相違点をご連絡しますので、修正のうえ再度アップロードしてください。</p>
         </div>
         <p style="margin-top:22px">
           <a class="btn-main" style="text-decoration:none" href="https://www.paypay-insurance.co.jp/promotion/car/app/" target="_blank" rel="noopener">PayPayほけん「あんしんドライブ」加入ページへ</a>
@@ -555,15 +555,22 @@
           <a class="link-quiet" href="https://paypay.ne.jp/article/0077/" target="_blank" rel="noopener">あんしんドライブについて（PayPay）</a>
         </p>
         <p style="font-size:14px;color:var(--sub);margin-top:26px">
-          加入が完了したら、申込完了画面の右下にある<b style="color:var(--text)">【加入詳細】</b>ボタンをタップし、ご本人様のお名前・車両ナンバー・保険期間が表示された画面のスクリーンショットを、<a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener" style="color:var(--text);text-decoration:underline">InstagramのDM</a>でお送りください。内容を確認でき次第、予約成立となります。
+          加入が完了したら、申込完了画面の右下にある<b style="color:var(--text)">【加入詳細】</b>ボタンをタップし、ご本人様のお名前・車両ナンバー・保険期間が表示された画面のスクリーンショットを、下のボタンからアップロードしてください。内容を確認でき次第、予約成立となります。
         </p>
         <figure class="fig" style="margin-top:18px">
           <img src="insurance-example.svg" alt="加入詳細画面の見本イラスト" style="width:250px;max-width:70vw;height:auto">
           <figcaption>正しい画面の例（イラスト）。審査は実際の加入詳細画面と照合します。イラストや加工された画像ではお通しできません。</figcaption>
         </figure>
+        <div style="margin-top:22px">
+          <input type="file" id="ins-file" accept="image/*" style="display:none" onchange="handleInsFile(this)">
+          <button class="btn-main" type="button" onclick="document.getElementById('ins-file').click()">スクリーンショットを選ぶ</button>
+          <p id="ins-status" style="font-size:13px;color:var(--sub);margin-top:12px"></p>
+          <img id="ins-preview" alt="" style="display:none;max-width:250px;width:70vw;height:auto;margin-top:12px;border:1px solid var(--line2)">
+          <p class="err" id="err-4" style="display:none">スクリーンショットのアップロードをお願いします</p>
+        </div>
         <div class="btn-row">
           <button class="btn-ghost" onclick="goStep(3)">戻る</button>
-          <button class="btn-main" onclick="goStep(5)">DMでスクリーンショットを送りました</button>
+          <button class="btn-main" onclick="goStep5Check()">予約を確定する</button>
         </div>
         <p class="fineprint">確認からキーの送付まで、自動認識で対応しています🤖 何か問題があれば、<a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener" style="color:var(--sub);text-decoration:underline">InstagramのDM</a>にてお急ぎご連絡ください。</p>
       </div>
@@ -834,6 +841,45 @@
       document.getElementById("plan-notice").style.display = "block";
     }
     updateInsTotal();
+  }
+  function handleInsFile(input){
+    var f = input.files && input.files[0];
+    if(!f) return;
+    var status = document.getElementById("ins-status");
+    status.textContent = "読み込み中…";
+    var img = new Image();
+    img.onload = function(){
+      var maxW = 1400;
+      var scale = Math.min(1, maxW / img.width);
+      var c = document.createElement("canvas");
+      c.width = Math.round(img.width * scale);
+      c.height = Math.round(img.height * scale);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      var dataUrl = c.toDataURL("image/jpeg", 0.82);
+      URL.revokeObjectURL(img.src);
+      var prev = document.getElementById("ins-preview");
+      prev.src = dataUrl;
+      prev.style.display = "block";
+      var done = function(){
+        booking.insuranceUploaded = true;
+        document.getElementById("err-4").style.display = "none";
+        status.textContent = "アップロードしました。内容を確認します。問題なければこのまま「予約を確定する」へお進みください。";
+      };
+      if(window.AmpAuth && AmpAuth.uploadInsurance){
+        AmpAuth.uploadInsurance(dataUrl).then(function(){ done(); }).catch(function(){ done(); });
+      } else {
+        try { localStorage.setItem("amp_insurance_shot", dataUrl); } catch(e) {}
+        done();
+      }
+    };
+    img.src = URL.createObjectURL(f);
+  }
+  function goStep5Check(){
+    if(!booking.insuranceUploaded){
+      document.getElementById("err-4").style.display = "block";
+      return;
+    }
+    goStep(5);
   }
   function goStep3(){
     if(!booking.plan){ document.getElementById("err-2").style.display = "block"; return; }
