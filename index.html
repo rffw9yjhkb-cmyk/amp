@@ -598,6 +598,17 @@
         <p style="font-size:14px;color:var(--sub)">
           この内容で加入できているかを、スクリーンショットで確認します。まだ加入していない方は、上の内容で加入してください。
         </p>
+        <p style="font-size:14px;color:var(--sub);margin-top:20px">
+          加入が完了したら、<b style="color:var(--text)">ご本人様のお名前</b>・<b style="color:var(--text)">車両ナンバー</b>・<b style="color:var(--text)">保険期間</b>が表示された画面のスクリーンショットを、下のボタンからアップロードしてください。内容を確認でき次第、予約成立となります。
+        </p>
+        <div style="margin-top:18px">
+          <input type="file" id="ins-file" accept="image/*" style="display:none" onchange="handleInsFile(this)">
+          <button class="btn-main" type="button" onclick="document.getElementById('ins-file').click()">スクリーンショットを選ぶ</button>
+          <p id="ins-status" style="font-size:13px;color:var(--sub);margin-top:12px"></p>
+          <img id="ins-preview" alt="" style="display:none;max-width:250px;width:70vw;height:auto;margin-top:12px;border:1px solid var(--line2)">
+          <p class="fineprint" style="margin-top:10px">アップロードした画像はここに表示されます。上の「あなたが選択した内容」と見比べて、相違がないかご確認ください。</p>
+          <p class="err" id="err-4" style="display:none">スクリーンショットのアップロードをお願いします</p>
+        </div>
         <div class="warnbox" style="margin-top:20px">
           <p class="w-title">期間とプランの選択にご注意ください</p>
           <p>プランを選択したページの下の方に、期間（開始日時と長さ）を選択する画面が出てきます。ご予約の日時・プランと一致しているか、必ずご確認ください。内容は自動で文字認識・照合しているため、条件が異なるとご予約をお通しできません。時間に余裕を持ってお申し込みください。なお、不一致があった場合は相違点をご連絡しますので、修正のうえ再度アップロードしてください。</p>
@@ -608,20 +619,10 @@
         <p style="margin-top:18px">
           <a class="link-quiet" href="https://paypay.ne.jp/article/0077/" target="_blank" rel="noopener">あんしんドライブについて（PayPay）</a>
         </p>
-        <p style="font-size:14px;color:var(--sub);margin-top:26px">
-          加入が完了したら、<b style="color:var(--text)">ご本人様のお名前</b>・<b style="color:var(--text)">車両ナンバー</b>・<b style="color:var(--text)">保険期間</b>が表示された画面のスクリーンショットを、下のボタンからアップロードしてください。内容を確認でき次第、予約成立となります。
-        </p>
         <figure class="fig" style="margin-top:18px">
           <img src="insurance-example.svg" alt="加入詳細画面の見本イラスト" style="width:250px;max-width:70vw;height:auto">
           <figcaption>正しい画面の例（イラスト）。審査は実際の加入詳細画面と照合します。イラストや加工された画像ではお通しできません。</figcaption>
         </figure>
-        <div style="margin-top:22px">
-          <input type="file" id="ins-file" accept="image/*" style="display:none" onchange="handleInsFile(this)">
-          <button class="btn-main" type="button" onclick="document.getElementById('ins-file').click()">スクリーンショットを選ぶ</button>
-          <p id="ins-status" style="font-size:13px;color:var(--sub);margin-top:12px"></p>
-          <img id="ins-preview" alt="" style="display:none;max-width:250px;width:70vw;height:auto;margin-top:12px;border:1px solid var(--line2)">
-          <p class="err" id="err-4" style="display:none">スクリーンショットのアップロードをお願いします</p>
-        </div>
         <p style="font-size:13px;color:var(--sub);margin-top:24px;border:1px solid var(--line2);padding:14px 16px;line-height:1.85">なお、保険でカバーされなかった費用（免責分・上限を超えた分・対象外の損害など）は、理由にかかわらず<b style="color:var(--text)">実費で精算</b>いただきます。</p>
         <div class="btn-row">
           <button class="btn-ghost" onclick="goStep(3)">戻る</button>
