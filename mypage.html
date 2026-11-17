@@ -103,6 +103,9 @@
   .link-quiet{color:var(--sub);font-size:13px;letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px}
   .link-quiet:hover{color:var(--text)}
   .ext-opt{display:inline-block;border:1px solid var(--line2);color:var(--sub);font-size:13px;letter-spacing:.08em;padding:9px 16px;margin:0 8px 8px 0}
+  .mypage-nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+  .mypage-nav a{border:1px solid var(--line2);color:var(--text);text-decoration:none;text-align:center;padding:17px 10px;font-size:14px;letter-spacing:.12em;transition:border-color .25s}
+  .mypage-nav a:hover{border-color:var(--text)}
 
   /* ===== Footer ===== */
   footer{border-top:1px solid var(--line);padding:44px 5vw 56px;max-width:720px;margin:0 auto}
@@ -144,15 +147,6 @@
     </div>
   </section>
 
-  <!-- ===== Emergency ===== -->
-  <section class="blk">
-    <div class="emergency">
-      <p class="e-title">トラブル・緊急のとき</p>
-      <p class="e-text">事故・故障・トラブルが発生したら、<b>保険会社へ連絡する前に、まずオーナーへご連絡ください。</b><br>ケガ人がいる場合など、人命に関わるときは迷わず警察（110）・救急（119）へ連絡してください。</p>
-      <a class="emg-btn" href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>緊急連絡する（Instagram DM）</a>
-    </div>
-  </section>
-
   <!-- ===== Status ===== -->
   <section class="blk">
     <p class="slabel">Status — 進行状況</p>
@@ -167,10 +161,26 @@
       </ol>
       <p class="status-note">現在のステータス：<b>保険確認済み</b>。次に、予約確定のご連絡をお送りします。スマホキーはご利用日の2日前にお送りします。</p>
     </div>
+    <nav class="mypage-nav">
+      <a href="#emergency">トラブルの場合</a>
+      <a href="#extension">延長の場合</a>
+      <a href="#insurance">保険の内容</a>
+      <a href="#contact">その他お問い合わせ</a>
+    </nav>
   </section>
 
+  <!-- ===== Emergency ===== -->
+  <section class="blk" id="emergency">
+    <div class="emergency">
+      <p class="e-title">トラブル・緊急のとき</p>
+      <p class="e-text">事故・故障・トラブルが発生したら、<b>保険会社へ連絡する前に、まずオーナーへご連絡ください。</b><br>ケガ人がいる場合など、人命に関わるときは迷わず警察（110）・救急（119）へ連絡してください。</p>
+      <a class="emg-btn" href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>緊急連絡する（Instagram DM）</a>
+    </div>
+  </section>
+
+
   <!-- ===== Insurance ===== -->
-  <section class="blk">
+  <section class="blk" id="insurance">
     <p class="slabel">Insurance — 保険情報</p>
     <div class="card">
       <dl class="summary">
@@ -209,7 +219,7 @@
   </section>
 
   <!-- ===== Extension ===== -->
-  <section class="blk">
+  <section class="blk" id="extension">
     <p class="slabel">Extension — 延長の手続き</p>
     <div class="card">
       <p style="font-size:14px;color:var(--sub);line-height:1.9">ご利用時間の延長は、<b style="color:var(--text)">1時間 ¥2,500</b>で、<b style="color:var(--text)">1〜5時間</b>まで選べます。終了時刻を5分過ぎるとスマホキーは自動で無効化されますので、延長をご希望の場合はお早めにお手続きください。お支払いが確認でき次第、新しいキーを発行します。</p>
@@ -234,6 +244,15 @@
         <a class="link-quiet" href="https://apps.apple.com/app/tesla/id582007913" target="_blank" rel="noopener" style="margin-right:22px">iPhoneの方（App Store）</a>
         <a class="link-quiet" href="https://play.google.com/store/apps/details?id=com.teslamotors.tesla" target="_blank" rel="noopener">Androidの方（Google Play）</a>
       </p>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section class="blk" id="contact">
+    <p class="slabel">Contact — その他お問い合わせ</p>
+    <div class="card">
+      <p style="font-size:14px;color:var(--sub);line-height:1.9">ご予約の変更・キャンセル、その他のご質問は、InstagramのDMで受け付けています。<br>お気軽にメッセージください。</p>
+      <a class="dm-btn" href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>オーナーにDMする（@tesla_model3.chuo）</a>
     </div>
   </section>
 
