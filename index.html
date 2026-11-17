@@ -141,6 +141,7 @@
   .plan-opt{border:1px solid var(--line);background:transparent;padding:26px;margin-bottom:14px;cursor:pointer;transition:border-color .3s}
   .plan-opt:hover{border-color:#3d3d3d}
   .plan-opt.selected{border-color:var(--text)}
+  .plan-opt.dim{opacity:.18}
   .plan-opt .p-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
   .plan-opt .p-name{font-size:16px;font-weight:400;letter-spacing:.16em}
   .plan-opt .p-price{font-size:14px;color:var(--sub);letter-spacing:.06em}
@@ -431,9 +432,8 @@
           </div>
           <ul>
             <li>対人・対物賠償：無制限</li>
-            <li>車両補償：<b style="color:var(--text)">なし</b></li>
+            <li>車両補償：なし</li>
           </ul>
-          <p class="p-warn">このプランには車両補償がありません。単独事故・車同士の事故のどちらでも、車の損害は補償されません。車を傷つけた場合、修理費は実費精算となります（ご負担の上限は車両時価額500万円）。</p>
         </div>
 
         <div id="plan-kihon" class="plan-opt" onclick="selectPlan('kihon')">
@@ -443,10 +443,8 @@
           </div>
           <ul>
             <li>対人・対物賠償：無制限</li>
-            <li>車両補償：一部のみ（上限300万円・免責15万円）</li>
-            <li>対象は「他の車との衝突・飛び石」など。<b style="color:var(--text)">単独事故は対象外</b>です</li>
+            <li>車両補償：上限300万円・免責15万円</li>
           </ul>
-          <p class="p-warn">単独事故（壁・柱・ガードレールなど、相手のいない事故）による車の損害は補償されません。保険でカバーされなかった分は実費精算となります（ご負担の上限は車両時価額500万円）。</p>
         </div>
 
         <div id="plan-anshin" class="plan-opt" onclick="selectPlan('anshin')">
@@ -456,10 +454,8 @@
           </div>
           <ul>
             <li>対人・対物賠償：無制限</li>
-            <li>車両補償：あり（上限300万円・免責15万円）</li>
-            <li><b style="color:var(--text)">単独事故も対象</b>です</li>
+            <li>車両補償：上限300万円・免責15万円</li>
           </ul>
-          <p class="p-warn">ご負担の上限は車両時価額500万円で、保険でカバーされなかった分については実費精算となります（例：全損の場合、300万円は保険でまかなわれ、残り約200万円が実費精算の対象です）。</p>
         </div>
 
         <div id="plan-notice">
@@ -813,6 +809,7 @@
     var keys = ["ote","kihon","anshin"];
     for(var i=0;i<keys.length;i++){
       document.getElementById("plan-" + keys[i]).classList.toggle("selected", keys[i] === key);
+      document.getElementById("plan-" + keys[i]).classList.toggle("dim", keys[i] !== key);
     }
     document.getElementById("err-2").style.display = "none";
     var NOTICES = {
