@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY PAGE — AMP.</title>
+<meta name="description" content="AMP. 借主専用マイページ（プロトタイプ）">
+<style>
+  :root{
+    --bg:#FFFFFF; --panel:#FAF9F6; --panel2:#F4F2ED;
+    --text:#141414; --sub:#6E6E6E; --faint:#A3A3A3;
+    --line:#E4E1D9; --line2:#CFCBC0;
+    --accent:#141414;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);
+    font-family:"Helvetica Neue",Helvetica,Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",sans-serif;
+    font-weight:300;line-height:1.9;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  ::selection{background:#141414;color:#FFFFFF}
+
+  /* ===== Header ===== */
+  header{display:flex;justify-content:space-between;align-items:center;
+    padding:22px 5vw;border-bottom:1px solid var(--line)}
+  .logo{font-size:19px;font-weight:300;letter-spacing:.34em;color:var(--text);text-decoration:none}
+  .hlabel{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--sub)}
+
+  /* ===== Layout ===== */
+  .wrap{max-width:720px;margin:0 auto;padding:56px 5vw 90px}
+  .slabel{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--sub);margin-bottom:22px}
+  section.blk{margin-top:64px}
+  section.blk:first-of-type{margin-top:0}
+
+  /* ===== Greeting ===== */
+  .greet{font-size:clamp(24px,6vw,32px);font-weight:200;letter-spacing:.1em;line-height:1.5}
+  .greet-sub{color:var(--sub);font-size:13px;margin-top:10px;letter-spacing:.04em}
+  .bno{display:inline-block;margin-top:20px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;
+    border:1px solid var(--line2);padding:6px 14px;color:var(--sub)}
+  .bno b{color:var(--text);font-weight:400}
+
+  /* ===== Summary card ===== */
+  .card{border:1px solid var(--line);background:var(--bg);padding:clamp(24px,5vw,40px)}
+  dl.summary{border-top:1px solid var(--line)}
+  dl.summary .row{display:flex;justify-content:space-between;gap:16px;padding:15px 2px;border-bottom:1px solid var(--line);font-size:14px}
+  dl.summary dt{color:var(--sub);font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding-top:3px;white-space:nowrap}
+  dl.summary dd{font-weight:400;letter-spacing:.05em;text-align:right}
+  dl.summary dd .yen{font-size:19px;font-weight:300}
+  @media(max-width:480px){
+    dl.summary .row{flex-direction:column;gap:2px}
+    dl.summary dd{text-align:left}
+  }
+
+  /* ===== Status steps ===== */
+  .status{border:1px solid var(--line);padding:clamp(24px,5vw,40px)}
+  .steps{display:flex;list-style:none}
+  .steps li{flex:1;text-align:center;position:relative;padding-top:26px}
+  .steps li::before{content:"";position:absolute;top:5px;left:50%;transform:translateX(-50%);
+    width:11px;height:11px;border-radius:50%;background:#fff;border:1px solid var(--line2);z-index:2}
+  .steps li::after{content:"";position:absolute;top:10px;left:calc(-50% + 8px);right:calc(50% + 8px);height:1px;background:var(--line)}
+  .steps li:first-child::after{display:none}
+  .steps li.done::before{background:var(--accent);border-color:var(--accent)}
+  .steps li.done::after{background:var(--accent)}
+  .steps li.now::before{background:#fff;border:2px solid var(--accent);width:13px;height:13px;top:4px}
+  .steps li .s-name{font-size:12px;letter-spacing:.08em;color:var(--faint)}
+  .steps li .s-en{display:block;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-top:2px}
+  .steps li.done .s-name,.steps li.now .s-name{color:var(--text);font-weight:400}
+  .steps li.now .s-name{border-bottom:1px solid var(--text);padding-bottom:2px}
+  @media(max-width:480px){.steps li .s-name{font-size:10.5px}.steps li .s-en{font-size:8px}}
+  .status-note{font-size:13px;color:var(--sub);margin-top:26px;border-top:1px solid var(--line);padding-top:18px}
+  .status-note b{color:var(--text);font-weight:400}
+
+  /* ===== Important notice ===== */
+  .notice{border:1.5px solid var(--accent);background:var(--panel);padding:clamp(24px,5vw,38px)}
+  .notice .n-title{font-size:16px;font-weight:400;letter-spacing:.16em;margin-bottom:6px}
+  .notice .n-en{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--sub);margin-bottom:20px}
+  .notice ul{list-style:none}
+  .notice li{font-size:14px;padding:14px 0;border-top:1px solid var(--line2);letter-spacing:.03em}
+  .notice li:first-child{border-top:none;padding-top:2px}
+  .notice li b{font-weight:500}
+  .notice li .lead-in{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--sub);margin-bottom:4px}
+  .dm-btn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;border:1px solid var(--text);color:var(--text);
+    padding:13px 26px;font-size:13px;letter-spacing:.14em;text-decoration:none;transition:.25s;background:#fff}
+  .dm-btn:hover{background:var(--text);color:#fff}
+  .dm-btn svg{flex:none}
+
+  /* ===== Key box ===== */
+  .keybox{border:1px solid var(--line);background:var(--panel);padding:clamp(24px,5vw,40px)}
+  .keybox p{font-size:14px;color:var(--sub);letter-spacing:.03em}
+  .keybox p b{color:var(--text);font-weight:400}
+  .keybox .k-time{font-size:clamp(22px,5.4vw,30px);font-weight:200;letter-spacing:.08em;color:var(--text);margin:6px 0 14px}
+
+  .fineprint{font-size:12px;color:var(--faint);margin-top:18px}
+
+  /* ===== Footer ===== */
+  footer{border-top:1px solid var(--line);padding:44px 5vw 56px;max-width:720px;margin:0 auto}
+  footer .flogo{font-size:15px;font-weight:300;letter-spacing:.34em;margin-bottom:10px}
+  footer p{color:var(--faint);font-size:11px;letter-spacing:.14em}
+  footer a{color:var(--sub)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">AMP.</a>
+  <span class="hlabel">My Page</span>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== Greeting ===== -->
+  <section class="blk">
+    <p class="slabel">My Page — ご予約内容</p>
+    <h1 class="greet">山田 太郎 様</h1>
+    <p class="greet-sub">ご予約ありがとうございます。ご利用内容と当日のご案内をまとめました。</p>
+    <p class="bno">Booking No. <b>AMP-2026-0007</b></p>
+  </section>
+
+  <!-- ===== Reservation ===== -->
+  <section class="blk">
+    <p class="slabel">Reservation — 予約内容</p>
+    <div class="card">
+      <dl class="summary">
+        <div class="row"><dt>Date</dt><dd>2026年11月30日（月）</dd></div>
+        <div class="row"><dt>Time</dt><dd>06:00 〜 18:00</dd></div>
+        <div class="row"><dt>Plan</dt><dd>12時間プラン</dd></div>
+        <div class="row"><dt>Price</dt><dd><span class="yen">¥9,000</span>（平日料金・充電代込み）</dd></div>
+        <div class="row"><dt>Vehicle</dt><dd>Tesla Model 3（品川 342 り 802）</dd></div>
+        <div class="row"><dt>Pick-up</dt><dd>東京都中央区湊3-13-11</dd></div>
+      </dl>
+      <p class="fineprint">受け渡しは非対面です。返却も同じ場所へお願いします。</p>
+    </div>
+  </section>
+
+  <!-- ===== Status ===== -->
+  <section class="blk">
+    <p class="slabel">Status — 進行状況</p>
+    <div class="status">
+      <ol class="steps">
+        <li class="done"><span class="s-name">予約確定</span><span class="s-en">Booked</span></li>
+        <li class="done now"><span class="s-name">保険確認済み</span><span class="s-en">Insurance OK</span></li>
+        <li><span class="s-name">キー送付</span><span class="s-en">Key</span></li>
+        <li><span class="s-name">利用中</span><span class="s-en">In Use</span></li>
+        <li><span class="s-name">返却完了</span><span class="s-en">Returned</span></li>
+      </ol>
+      <p class="status-note">現在のステータス：<b>保険確認済み</b>。次は、ご利用開始時刻にスマホキーをお送りします。</p>
+    </div>
+  </section>
+
+  <!-- ===== Insurance ===== -->
+  <section class="blk">
+    <p class="slabel">Insurance — 保険情報</p>
+    <div class="card">
+      <dl class="summary">
+        <div class="row"><dt>Provider</dt><dd>PayPayほけん「あんしんドライブ」</dd></div>
+        <div class="row"><dt>Plan</dt><dd>お手軽プラン</dd></div>
+        <div class="row"><dt>Period</dt><dd>2026年11月30日 06:00 〜 18:00</dd></div>
+        <div class="row"><dt>Policy No.</dt><dd>00Y2P8000007</dd></div>
+        <div class="row"><dt>Insured</dt><dd>山田 太郎 様</dd></div>
+      </dl>
+      <p class="fineprint">加入内容は、ご提出いただいた加入詳細画面で確認済みです。保険期間の変更・解約はできません。</p>
+    </div>
+  </section>
+
+  <!-- ===== Important notice ===== -->
+  <section class="blk">
+    <div class="notice">
+      <p class="n-title">大切なお知らせ</p>
+      <p class="n-en">Important — Please Read</p>
+      <ul>
+        <li>
+          <span class="lead-in">In Case of Trouble</span>
+          <b>事故・故障・トラブルが発生したら、保険会社へ連絡する前に、まずオーナーへご連絡ください。</b><br>
+          連絡先はInstagramのDMです。状況を確認のうえ、こちらから進め方をご案内します。
+        </li>
+        <li>
+          <span class="lead-in">Traffic Violations</span>
+          交通違反の<b>反則金・違反点数は、運転者ご本人の負担</b>です。違反があった場合は、速やかにオーナーへご報告ください。
+        </li>
+        <li>
+          <span class="lead-in">Return</span>
+          返却時は、<b>充電75%程度</b>を目安にご返却をお願いします（充電代は料金に含まれています）。
+        </li>
+      </ul>
+      <a class="dm-btn" href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>オーナーにDMする（@tesla_model3.chuo）</a>
+    </div>
+  </section>
+
+  <!-- ===== Key ===== -->
+  <section class="blk">
+    <p class="slabel">Key — キーの受け取り</p>
+    <div class="keybox">
+      <p>スマホキーの招待リンクは、ご利用開始時刻にお送りします。</p>
+      <p class="k-time">2026年11月30日 06:00</p>
+      <p>招待リンクは <b>InstagramのDM</b> でお送りします。リンクを開いてTeslaアプリにドライバー登録すると、お車を解錠・そのまま出発できます。<b>開始時刻になっても届かない場合は、DMにてお急ぎご連絡ください。</b></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p class="flogo">AMP.</p>
+  <p>お問い合わせは Instagram DM へ — <a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener">@tesla_model3.chuo</a></p>
+  <p style="margin-top:8px">Tesla Model 3 — Minato, Chuo-ku, Tokyo</p>
+  <p style="margin-top:14px">※ 本ページはプロトタイプです。表示内容はすべてサンプルデータです。</p>
+</footer>
+
+</body>
+</html>
