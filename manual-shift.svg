@@ -1,63 +1,63 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" font-family="Helvetica Neue, Helvetica, Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', sans-serif">
   <!-- screen body -->
   <rect x="60" y="25" width="520" height="350" rx="18" fill="#FAF9F6" stroke="#CFCBC0" stroke-width="2"/>
-  <!-- shift strip (left edge) -->
-  <path d="M78 25 h74 v350 h-74 a18 18 0 0 1 -18 -18 v-314 a18 18 0 0 1 18 -18 z" fill="#F1EFE8"/>
-  <line x1="152" y1="25" x2="152" y2="375" stroke="#CFCBC0" stroke-width="1.5"/>
+  <!-- shift strip (right edge, driver side for right-hand drive) -->
+  <path d="M488 25 h74 a18 18 0 0 1 18 18 v314 a18 18 0 0 1 -18 18 h-74 z" fill="#F1EFE8"/>
+  <line x1="488" y1="25" x2="488" y2="375" stroke="#CFCBC0" stroke-width="1.5"/>
 
   <!-- P button -->
-  <rect x="80" y="42" width="52" height="34" rx="9" fill="#141414"/>
-  <text x="106" y="66" font-size="19" fill="#FFFFFF" text-anchor="middle" font-weight="500">P</text>
-  <text x="106" y="94" font-size="10.5" fill="#6E6E6E" text-anchor="middle">パーキング</text>
+  <rect x="508" y="42" width="52" height="34" rx="9" fill="#141414"/>
+  <text x="534" y="66" font-size="19" fill="#FFFFFF" text-anchor="middle" font-weight="500">P</text>
+  <text x="534" y="94" font-size="10.5" fill="#6E6E6E" text-anchor="middle">パーキング</text>
 
   <!-- D (swipe up) -->
-  <text x="106" y="140" font-size="27" fill="#141414" text-anchor="middle" font-weight="500">D</text>
-  <text x="106" y="158" font-size="10.5" fill="#6E6E6E" text-anchor="middle">前進</text>
-  <path d="M106 196 v-22" stroke="#141414" stroke-width="2.5"/>
-  <path d="M98 182 l8 -10 8 10" fill="none" stroke="#141414" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="534" y="140" font-size="27" fill="#141414" text-anchor="middle" font-weight="500">D</text>
+  <text x="534" y="158" font-size="10.5" fill="#6E6E6E" text-anchor="middle">前進</text>
+  <path d="M534 196 v-22" stroke="#141414" stroke-width="2.5"/>
+  <path d="M526 182 l8 -10 8 10" fill="none" stroke="#141414" stroke-width="2.5" stroke-linecap="round"/>
 
   <!-- car icon -->
   <g>
-    <path d="M76 232 c3 -12 13 -17 21 -19 c6 -7 20 -7 26 0 c9 2 16 8 18 19 l1 7 c0 3 -2 4 -4 4 h-5 a10 10 0 0 0 -20 0 h-10 a10 10 0 0 0 -20 0 h-4 c-2 0 -4 -1 -4 -4 z" fill="#141414"/>
-    <path d="M96 214 c5 -4 17 -4 22 0 l4 6 h-30 z" fill="#FAF9F6" opacity="0.85"/>
-    <circle cx="93" cy="243" r="6.5" fill="#141414"/>
-    <circle cx="123" cy="243" r="6.5" fill="#141414"/>
+    <path d="M504 232 c3 -12 13 -17 21 -19 c6 -7 20 -7 26 0 c9 2 16 8 18 19 l1 7 c0 3 -2 4 -4 4 h-5 a10 10 0 0 0 -20 0 h-10 a10 10 0 0 0 -20 0 h-4 c-2 0 -4 -1 -4 -4 z" fill="#141414"/>
+    <path d="M524 214 c5 -4 17 -4 22 0 l4 6 h-30 z" fill="#FAF9F6" opacity="0.85"/>
+    <circle cx="521" cy="243" r="6.5" fill="#141414"/>
+    <circle cx="551" cy="243" r="6.5" fill="#141414"/>
   </g>
 
   <!-- R (swipe down) -->
-  <path d="M106 258 v22" stroke="#141414" stroke-width="2.5"/>
-  <path d="M98 272 l8 10 8 -10" fill="none" stroke="#141414" stroke-width="2.5" stroke-linecap="round"/>
-  <text x="106" y="312" font-size="27" fill="#141414" text-anchor="middle" font-weight="500">R</text>
-  <text x="106" y="330" font-size="10.5" fill="#6E6E6E" text-anchor="middle">後退</text>
+  <path d="M534 258 v22" stroke="#141414" stroke-width="2.5"/>
+  <path d="M526 272 l8 10 8 -10" fill="none" stroke="#141414" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="534" y="312" font-size="27" fill="#141414" text-anchor="middle" font-weight="500">R</text>
+  <text x="534" y="330" font-size="10.5" fill="#6E6E6E" text-anchor="middle">後退</text>
 
   <!-- main screen: simple map -->
   <g stroke="#DDD9CF" stroke-width="7" fill="none" stroke-linecap="round">
-    <path d="M190 90 h390"/>
-    <path d="M190 200 h390"/>
-    <path d="M250 40 v240"/>
-    <path d="M400 40 v240"/>
-    <path d="M180 300 l180 -60 l220 -30"/>
+    <path d="M84 90 h380"/>
+    <path d="M84 200 h380"/>
+    <path d="M150 40 v240"/>
+    <path d="M300 40 v240"/>
+    <path d="M84 300 l170 -60 l200 -30"/>
   </g>
-  <path d="M250 268 l120 -44 l150 -18" stroke="#141414" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-  <circle cx="250" cy="268" r="7" fill="#141414"/>
-  <circle cx="520" cy="206" r="6" fill="#FFFFFF" stroke="#141414" stroke-width="3"/>
+  <path d="M150 268 l110 -44 l140 -18" stroke="#141414" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <circle cx="150" cy="268" r="7" fill="#141414"/>
+  <circle cx="400" cy="206" r="6" fill="#FFFFFF" stroke="#141414" stroke-width="3"/>
 
   <!-- top status -->
-  <text x="560" y="52" font-size="13" fill="#6E6E6E" text-anchor="end">75%</text>
-  <rect x="486" y="40" width="30" height="13" rx="3" fill="none" stroke="#A3A3A3" stroke-width="1.5"/>
-  <rect x="489" y="43" width="19" height="7" rx="1.5" fill="#141414"/>
+  <text x="84" y="52" font-size="13" fill="#6E6E6E">75%</text>
+  <rect x="122" y="40" width="30" height="13" rx="3" fill="none" stroke="#A3A3A3" stroke-width="1.5"/>
+  <rect x="125" y="43" width="19" height="7" rx="1.5" fill="#141414"/>
 
   <!-- bottom dock -->
-  <line x1="176" y1="330" x2="556" y2="330" stroke="#E4E1D9" stroke-width="1.5"/>
+  <line x1="84" y1="330" x2="464" y2="330" stroke="#E4E1D9" stroke-width="1.5"/>
   <g fill="#CFCBC0">
-    <rect x="216" y="342" width="22" height="22" rx="6"/>
-    <rect x="286" y="342" width="22" height="22" rx="6"/>
-    <rect x="356" y="342" width="22" height="22" rx="6"/>
-    <rect x="426" y="342" width="22" height="22" rx="6"/>
-    <rect x="496" y="342" width="22" height="22" rx="6"/>
+    <rect x="114" y="342" width="22" height="22" rx="6"/>
+    <rect x="184" y="342" width="22" height="22" rx="6"/>
+    <rect x="254" y="342" width="22" height="22" rx="6"/>
+    <rect x="324" y="342" width="22" height="22" rx="6"/>
+    <rect x="394" y="342" width="22" height="22" rx="6"/>
   </g>
 
   <!-- callout -->
-  <text x="366" y="112" font-size="14.5" fill="#141414" text-anchor="middle">画面左端の車のマークがシフトです</text>
-  <text x="366" y="134" font-size="12" fill="#6E6E6E" text-anchor="middle">上にスワイプで D（前進）／ 下にスワイプで R（後退）</text>
+  <text x="274" y="112" font-size="14.5" fill="#141414" text-anchor="middle">画面右端の車のマークがシフトです</text>
+  <text x="274" y="134" font-size="12" fill="#6E6E6E" text-anchor="middle">上にスワイプで D（前進）／ 下にスワイプで R（後退）</text>
 </svg>
