@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HISTORY — AMP.</title>
+<meta name="description" content="AMP. ご利用履歴のご案内（プロトタイプ）">
+<style>
+  :root{
+    --bg:#FFFFFF; --panel:#FAF9F6; --panel2:#F4F2ED;
+    --text:#141414; --sub:#6E6E6E; --faint:#A3A3A3;
+    --line:#E4E1D9; --line2:#CFCBC0;
+    --accent:#141414;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);
+    font-family:"Helvetica Neue",Helvetica,Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",sans-serif;
+    font-weight:300;line-height:1.9;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  ::selection{background:#141414;color:#FFFFFF}
+  header{display:flex;justify-content:space-between;align-items:center;
+    padding:22px 5vw;border-bottom:1px solid var(--line)}
+  .logo{font-size:19px;font-weight:300;letter-spacing:.34em;color:var(--text);text-decoration:none}
+  .hlabel{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--sub)}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 5vw 90px}
+  .slabel{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--sub);margin-bottom:22px}
+  .card{border:1px solid var(--line);background:var(--bg);padding:clamp(24px,5vw,40px)}
+  dl.summary{border-top:1px solid var(--line)}
+  dl.summary + dl.summary{margin-top:28px}
+  dl.summary .row{display:flex;justify-content:space-between;gap:16px;padding:15px 2px;border-bottom:1px solid var(--line);font-size:14px}
+  dl.summary dt{color:var(--sub);font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding-top:3px;white-space:nowrap}
+  dl.summary dd{font-weight:400;letter-spacing:.05em;text-align:right}
+  dl.summary dd .yen{font-size:19px;font-weight:300}
+  @media(max-width:480px){
+    dl.summary .row{flex-direction:column;gap:2px}
+    dl.summary dd{text-align:left}
+  }
+  .fineprint{font-size:12px;color:var(--faint);margin-top:18px}
+  .backlink{display:inline-block;margin-top:34px;font-size:12px;letter-spacing:.18em;color:var(--sub);text-decoration:none;border-bottom:1px solid var(--line2);padding-bottom:2px}
+  .backlink:hover{color:var(--text);border-color:var(--text)}
+  footer{border-top:1px solid var(--line);padding:44px 5vw;text-align:center;color:var(--faint);font-size:11.5px;letter-spacing:.14em}
+  .flogo{font-size:15px;letter-spacing:.34em;color:var(--sub);margin-bottom:12px}
+  footer a{color:var(--sub)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">AMP.</a>
+  <span class="hlabel">History</span>
+</header>
+
+<main class="wrap">
+  <p class="slabel">History — ご利用履歴</p>
+  <div class="card">
+    <dl class="summary">
+      <div class="row"><dt>Date</dt><dd>2026年10月25日（日）10:00 〜 22:00</dd></div>
+      <div class="row"><dt>Plan</dt><dd>12時間プラン</dd></div>
+      <div class="row"><dt>Price</dt><dd><span class="yen">¥11,000</span>（土日料金・充電代込み）</dd></div>
+      <div class="row"><dt>Booking No.</dt><dd>AMP-2026-0004</dd></div>
+      <div class="row"><dt>Status</dt><dd>返却完了</dd></div>
+    </dl>
+    <dl class="summary">
+      <div class="row"><dt>Date</dt><dd>2026年9月23日（水・祝）09:00 〜 翌09:00</dd></div>
+      <div class="row"><dt>Plan</dt><dd>24時間プラン</dd></div>
+      <div class="row"><dt>Price</dt><dd><span class="yen">¥14,000</span>（土日祝料金・充電代込み）</dd></div>
+      <div class="row"><dt>Booking No.</dt><dd>AMP-2026-0002</dd></div>
+      <div class="row"><dt>Status</dt><dd>返却完了</dd></div>
+    </dl>
+    <p class="fineprint">いつもご利用ありがとうございます。過去のご利用内容をこちらに表示します。</p>
+  </div>
+  <a class="backlink" href="mypage.html">← マイページに戻る</a>
+</main>
+
+<footer>
+  <p class="flogo">AMP.</p>
+  <p>お問い合わせは Instagram DM へ — <a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener">@tesla_model3.chuo</a></p>
+  <p style="margin-top:14px">※ 本ページはプロトタイプです。表示内容はすべてサンプルデータです。</p>
+</footer>
+
+</body>
+</html>
