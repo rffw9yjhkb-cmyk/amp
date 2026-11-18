@@ -424,7 +424,7 @@
           <div id="reg-passkey" class="plan-opt" onclick="toggleReg('passkey')">
             <div class="p-head">
               <span class="p-name">パスキーで登録</span>
-              <span class="p-price">おすすめ<span class="badge" id="reg-badge-passkey" style="display:none">登録済み</span></span>
+              <span class="p-price">おすすめ<span class="badge" id="reg-badge-passkey" style="display:none">完了済み</span></span>
             </div>
             <ul>
               <li>Face ID・指紋認証でログインできます。パスワードは不要です</li>
@@ -433,7 +433,7 @@
           <div id="reg-facebook" class="plan-opt" onclick="toggleReg('facebook')">
             <div class="p-head">
               <span class="p-name">Facebookで登録</span>
-              <span class="p-price">ワンタッチ<span class="badge" id="reg-badge-facebook" style="display:none">登録済み</span></span>
+              <span class="p-price">ワンタッチ<span class="badge" id="reg-badge-facebook" style="display:none">完了済み</span></span>
             </div>
             <ul>
               <li>お持ちのFacebookアカウントで、そのままログインできます</li>
@@ -799,7 +799,11 @@
   function toggleReg(key){
     booking.reg[key] = !booking.reg[key];
     document.getElementById("reg-" + key).classList.toggle("selected", !!booking.reg[key]);
-    if(booking.reg[key]){ document.getElementById("err-reg").style.display = "none"; }
+    if(booking.reg[key]){
+      document.getElementById("err-reg").style.display = "none";
+      /* タップしたその場で登録を開始し、完了したら「完了済み」表示にする */
+      if(window.AmpAuth && AmpAuth.registerMethod){ AmpAuth.registerMethod(key, booking).then(applyRegResult); }
+    }
   }
   /* マイページ登録の完了状態（サーバーで確認できた分だけ true になる） */
   var regState = { passkey:false, facebook:false };
@@ -827,7 +831,7 @@
       regNote("マイページ登録を完了できませんでした。ご予約はそのまま進められます（登録は後からでも行えます）。");
     } else if(res.mode === "deferred"){
       regNote("マイページ登録はスキップしました。ご予約はそのまま進められます（登録は後からでも行えます）。");
-    } else if(res.mode === "signup-completed" || res.mode === "already-signed-in"){
+    } else if(res.mode === "signup-completed" || res.mode === "already-signed-in" || res.mode === "passkey-added"){
       regNote("");
     }
   }
@@ -994,8 +998,8 @@
       document.getElementById("cf-plan").textContent = booking.plan === "other" ? "その他のワンデー保険" : (p ? p.name : "—");
       var regs = [];
       var authOn = !!(window.AmpAuth && AmpAuth.configured());
-      if(booking.reg.passkey) regs.push("パスキー" + (authOn ? (regState.passkey ? "（登録済み）" : "（未登録）") : ""));
-      if(booking.reg.facebook) regs.push("Facebook" + (authOn ? (regState.facebook ? "（登録済み）" : "（未登録）") : ""));
+      if(booking.reg.passkey) regs.push("パスキー" + (authOn ? (regState.passkey ? "（完了済み）" : "（未登録）") : ""));
+      if(booking.reg.facebook) regs.push("Facebook" + (authOn ? (regState.facebook ? "（完了済み）" : "（未登録）") : ""));
       document.getElementById("cf-reg").textContent = regs.length ? regs.join(" / ") : "—";
     }
     window.scrollTo(0,0);
