@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLOW — AMP.</title>
+<meta name="description" content="AMP. ご利用当日の流れ（乗る前・返却時の車体撮影と確認）のご案内（プロトタイプ）">
+<style>
+  :root{
+    --bg:#FFFFFF; --panel:#FAF9F6; --panel2:#F4F2ED;
+    --text:#141414; --sub:#6E6E6E; --faint:#A3A3A3;
+    --line:#E4E1D9; --line2:#CFCBC0;
+    --accent:#141414;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);
+    font-family:"Helvetica Neue",Helvetica,Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",sans-serif;
+    font-weight:300;line-height:1.9;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  ::selection{background:#141414;color:#FFFFFF}
+  header{display:flex;justify-content:space-between;align-items:center;
+    padding:22px 5vw;border-bottom:1px solid var(--line)}
+  .logo{font-size:19px;font-weight:300;letter-spacing:.34em;color:var(--text);text-decoration:none}
+  .hlabel{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--sub)}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 5vw 90px}
+  .slabel{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--sub);margin-bottom:22px}
+  .step{border:1px solid var(--line);background:var(--bg);padding:clamp(24px,5vw,36px);margin-bottom:20px}
+  .step .no{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+  .step h2{font-size:19px;font-weight:400;letter-spacing:.08em;margin-bottom:12px}
+  .step p{font-size:14px;color:var(--sub)}
+  .step p b{color:var(--text);font-weight:500}
+  .upbtn{display:inline-block;margin-top:16px;border:1px solid var(--line2);padding:11px 22px;font-size:12.5px;letter-spacing:.12em;color:var(--sub)}
+  .fineprint{font-size:12px;color:var(--faint);margin-top:18px}
+  .backlink{display:inline-block;margin-top:14px;font-size:12px;letter-spacing:.18em;color:var(--sub);text-decoration:none;border-bottom:1px solid var(--line2);padding-bottom:2px}
+  .backlink:hover{color:var(--text);border-color:var(--text)}
+  footer{border-top:1px solid var(--line);padding:44px 5vw;text-align:center;color:var(--faint);font-size:11.5px;letter-spacing:.14em}
+  .flogo{font-size:15px;letter-spacing:.34em;color:var(--sub);margin-bottom:12px}
+  footer a{color:var(--sub)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">AMP.</a>
+  <span class="hlabel">Flow</span>
+</header>
+
+<main class="wrap">
+  <p class="slabel">Flow — 当日の流れ</p>
+
+  <div class="step">
+    <p class="no">Step 1 — Before</p>
+    <h2>乗る前の360度撮影</h2>
+    <p>出発前に、車の周りを<b>ぐるっと一周</b>しながら、車体全体を撮影してください。動画でも、4方向からの写真でも構いません。ゆっくり一周し、ホイールやバンパーの下部も映してください。この撮影が、もともとあった傷の記録になります。</p>
+    <span class="upbtn">撮影した画像をアップロード（準備中）</span>
+  </div>
+
+  <div class="step">
+    <p class="no">Step 2 — Drive</p>
+    <h2>出発</h2>
+    <p>撮影が終わったら、スマホキーで解錠してそのまま出発できます。操作方法は<a href="manual.html" style="text-decoration:underline">操作方法マニュアル</a>をご覧ください。</p>
+  </div>
+
+  <div class="step">
+    <p class="no">Step 3 — Return</p>
+    <h2>返却時の360度撮影</h2>
+    <p>返却場所に駐車したら、乗る前と同じように<b>車の周りを一周</b>して撮影し、アップロードしてください。この2回の撮影をもとに、傷の確認を行います。</p>
+    <span class="upbtn">撮影した画像をアップロード（準備中）</span>
+  </div>
+
+  <div class="step">
+    <p class="no">Step 4 — Check</p>
+    <h2>傷の確認</h2>
+    <p>乗る前と返却時の撮影を見比べて、新しい傷や汚れがないかを確認します。問題がなければ、そのまま返却完了です。ご自身で気づいた傷や汚れがあれば、返却のタイミングで<a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener" style="text-decoration:underline">InstagramのDM</a>からご申告ください。確認の結果、新しい傷や汚れがあった場合はオーナーからご連絡します。</p>
+  </div>
+
+  <p class="fineprint">撮影は、トラブル防止のためご協力をお願いしています。保険でカバーされない損害は、理由にかかわらず実費で精算いただきます。</p>
+  <a class="backlink" href="mypage.html">← マイページに戻る</a>
+</main>
+
+<footer>
+  <p class="flogo">AMP.</p>
+  <p>お問い合わせは Instagram DM へ — <a href="https://ig.me/m/tesla_model3.chuo" target="_blank" rel="noopener">@tesla_model3.chuo</a></p>
+  <p style="margin-top:14px">※ 本ページはプロトタイプです。表示内容はすべてサンプルです。</p>
+</footer>
+
+</body>
+</html>
